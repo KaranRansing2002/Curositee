@@ -178,7 +178,7 @@ const ProdImage = ({ images }) => {
 
 export default ProdImage;
 
-export const SimilarProd = ({ prods }) => {
+export const SimilarProd = ({ prods,cName }) => {
   
   const navigate = useNavigate();
 
@@ -189,12 +189,12 @@ export const SimilarProd = ({ prods }) => {
 
   return (
     
-    <div className="h-16 flex flex-wrap gap-3 justify-center md:justify-start ">
+    <div className="h-full w-full flex gap-3 justify-center md:justify-start ">
       {prods.map((prod, index) => (
-        <div key={index}>
+        <div key={index} className="">
           <img
             src={prod.images[0]}
-            className="w-[50px] h-[60px] rounded border border-black cursor-pointer"
+            className={cName ? cName : "h-full object-cover flex rounded border border-black cursor-pointer"}
             alt={prod.title}
             onClick={() => handleImageClick(index)}
           />

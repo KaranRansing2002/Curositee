@@ -14,6 +14,9 @@ const ProductDesc = () => {
 	const handleCheck = () => {
 		setShowResult(true);
 	};
+	
+
+	const [size, setSize] = useState();
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 p-2  ">
@@ -50,14 +53,14 @@ const ProductDesc = () => {
 				</div>
 				<hr></hr>
 				<div className="flex-col gap-4 sm:gap-4 justify-center items-center md:flex md:justify-start md:items-start">
-					<SimilarProd prods={prods} />
+					<div className="w-80 "><SimilarProd prods={prods} /></div>
 					<div className="text-center md:text-left">
 						<p className="pb-3 pt-3">SELECT A SIZE</p>
 						<div className="flex flex-wrap gap-3 justify-center md:justify-start">
-							{data.sizes.map((size, idx) => (
+							{data.sizes.map((Size, idx) => (
 								<div key={idx} className="flex gap-2 items-center">
-									<div className="items-center h-8 w-8 border border-black rounded cursor-pointer">
-										<p className="Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer hover:bg-black hover:text-white">{size}</p>
+									<div onClick={() => setSize(Size)} className="items-center h-8 w-8 border border-black rounded cursor-pointer">
+										<p className={size==Size ? "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer bg-black text-green-400" : "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer hover:bg-black hover:text-white"} >{Size}</p>
 									</div>
 								</div>
 							))}
@@ -129,7 +132,7 @@ const ProductDesc = () => {
 					</div>
 				</dialog>
 
-				<Bag />
+				<Bag size={size} />
 
 				<button className="btn bg-white text-black border  border-black" onClick={() => document.getElementById('my_modal_3').showModal()}>
 					<img className="h-4" src="https://cdn.icon-icons.com/icons2/2761/PNG/512/love_heart_icon_176421.png" />

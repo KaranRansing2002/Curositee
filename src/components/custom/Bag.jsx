@@ -1,21 +1,23 @@
 import React from 'react'
 import { useLocation, useParams } from 'react-router-dom';
-import { YouMayLike } from './ProdImage';
+import { SimilarProd, YouMayLike } from './ProdImage';
 import { prods } from '@/data/proddData';
 
 const useQuery = () => {
 	return new URLSearchParams(useLocation().search);
 };
-const Bag = () => {
+const Bag = ({size}) => {
     const query = useQuery();
     const {index} = useParams();
-	const data = prods[index];
+    const data = prods[index];
+    
+    console.log(size);
 
     return (
         <div className="drawer drawer-end relative z-20">
     <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-    <div className="drawer-content">
-        <label htmlFor="my-drawer" className="btn w-full bg-black text-white hover:skeleton hover:bg-black">
+    <div className="drawer-content"  >
+        <label htmlFor="my-drawer" disabled={size==undefined} className="btn w-full bg-black text-white hover:skeleton hover:bg-black">
             <img className="h-4 mr-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvFSdPgCHsGunAivcnS9OvmlVRLpHGqeDb6w&usqp=CAU" alt="Bag icon" />
             ADD TO BAG
         </label>
@@ -33,7 +35,7 @@ const Bag = () => {
                 <div>
                     <h2 className="font-semibold">{data.title}</h2>
                     <p>Color: {data.color}</p>
-                    <p>Size: XL</p>
+                            <p>Size: { size}</p>
                     <div className="flex items-center mt-2">
                         <button className="border px-2">-</button>
                         <span className="mx-2">1</span>
@@ -46,7 +48,7 @@ const Bag = () => {
                     <h3 className="font-semibold mb-4">YOU MAY ALSO LIKE</h3>
                     <div className='h-[]250px'>
 
-                    <YouMayLike prods={prods} imageSize="250px"/>
+                    <div ><SimilarProd cName={"w-24 h-32 object-cover"} prods={prods} imageSize="250px"/></div>
                     </div>
                     
             <div className="grid grid-cols-4 gap-2 mb-6">
