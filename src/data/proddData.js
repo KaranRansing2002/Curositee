@@ -162,5 +162,46 @@ export const prods = [
     description:
       "Everyone needs a slim fit polo tee for their wardrobe rotation. This T-shirt is soft, made of 60% cotton, 40% polyester fabric which is breathable, making it ideal for everyday wear no matter what the activity. This light green textured pattern T-shirt features half sleeve and is quick and easy to wear.",
   },
+  {
+    title: "NOVA CREAM LINEN BLEND TROUSER",
+    price: 1599,
+    offers: [
+      {
+        title: "INR 1,439",
+        desc: "Buy 2 & Get Flat 10% Off! ",
+        // code: "BUY2",
+      },
+      {
+        title: "INR 899",
+        desc: "Buy 2 & Get Flat 10% Off!",
+        code: "Code : FLAT50",
+      },
+      {
+        title: "INR 799",
+        desc: "Buy 5 & Get Flat 20% Off!",
+        // code: "FLAT50",
+      },
+      {
+        title: "INR 849",
+        desc: "Flat 15% Off on minimum purchase of 2699/-",
+        code: "Code : FLAT1",
+      },
+    ],
+    images: [
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M21.jpg?v=1709550340&width=1800",
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M1.jpg?v=1709550340&width=1800",
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M29.jpg?v=1709550340&width=1800",
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M35.jpg?v=1709550340&width=1800",
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M5.jpg?v=1709550340&width=1800",
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M5.jpg?v=1709550340&width=1800",
+      "https://www.snitch.co.in/cdn/shop/files/4MST2242-03-M5.jpg?v=1709550340&width=1800",
+    ],
+    color:"Orange",
+    Cash_on: 1,
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    date:"27 Jun",
+    description:
+      "Crisp, smart and versatile, these wardrobe-staple linen trousers sport a classic silhouette and are easy to style for any casual occasion, be it an outdoor event or your next airport look. This pair of rise trousers are tailored to your comfort and is finished with subtle details.",
+  },
   
 ];

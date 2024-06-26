@@ -179,10 +179,12 @@ const ProdImage = ({ images }) => {
 export default ProdImage;
 
 export const SimilarProd = ({ prods }) => {
+  
   const navigate = useNavigate();
 
   const handleImageClick = (index) => {
-    navigate(`/product?index=${index}`);
+
+    navigate(`/productDesc/${index}`);
   };
 
   return (

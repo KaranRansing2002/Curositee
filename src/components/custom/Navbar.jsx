@@ -41,7 +41,7 @@ const Navbar = () => {
                         <SheetHeader>
                             <div className='flex gap-2 items-center'>
                                 <div className='rounded-full bg-slate-300 p-3'><User/></div>
-                                <h2>Login</h2>
+                                <Link to='/login'><h2>Login</h2></Link>
                             </div>
                         </SheetHeader>
                         <div className="grid gap-8 p-6 mt-6">

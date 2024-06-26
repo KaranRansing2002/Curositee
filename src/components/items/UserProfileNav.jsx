@@ -7,7 +7,7 @@ import WishListIcon from "@/icons/WishIcon"
 import SearchIcon from "@/icons/SearchIcon"
 import PasswordIcon from "@/icons/passwordIcon"
 import CartIcon from "@/icons/ShoppingBagIcon"
-export default function UserProfileNav() {
+export default function UserProfileNav({setEve}) {
     return (
         <div className='flex flex-col justify-center '>
             <div className="flex justify-center" >
@@ -25,13 +25,13 @@ export default function UserProfileNav() {
                     <CardContent>
                         <div className="grid grid-cols-1 gap-8 divide-y text-xs p-3 mt-3 ">
                             <div className="">
-                                <div className="flex flex-row m-1 pt-6">
+                                <div className="flex flex-row m-1 pt-6" onClick={()=>setEve(0)}>
                                     <UserIcon />
                                     <a href="#"><p className="p-1">My Profile</p></a>
                                 </div>
-                                <div className="flex flex-row m-1">
+                                <div className="flex flex-row m-1" onClick={()=>setEve(1)}>
                                     <AddressIcon />
-                                    <a href="#"><p className="p-1">Dehivery Address</p></a>
+                                    <a href="#"><p className="p-1">Delivery Address</p></a>
                                 </div>
                             </div>
                             <div className="">
