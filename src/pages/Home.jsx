@@ -1,8 +1,7 @@
 import Hero from '@/components/custom/Hero'
-import ImageCard from '@/components/custom/ImageCard'
-import React, { useState } from 'react'
-import { prods } from '@/data/proddData'
 import { Button } from '@/components/ui/button'
+import { prods } from '@/data/proddData'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
@@ -58,11 +57,10 @@ const ProdCard = ({ data, ind }) => {
     const [image, setImage] = useState(data.images[0]);
     return (
         <Link to={`/productDesc/${ind}`}>
-            <div className='flex flex-col cursor-pointer rounded p-2 shadow-2xl' >
-                <img src={image} className='hover:brightness-75 transition-all flex ease-linear hover:scale-[]' onMouseEnter={() => setImage(data.images.length > 1 ? data.images[1] : image)} onMouseLeave={() => setImage(data.images[0])} />
-                <h3 className='text-base font-medium text-slate-800 text-left'>{data.title[0] + data.title.substring(1).toLowerCase()}</h3>
-                <p className='text-left text-sm text-slate-600'>INR : {data.price}</p>
-
+            <div className='flex flex-col cursor-pointer p-2 shadow-2xl rounded border border-slate-200' >
+                <img src={image} className='hover:brightness-75 rounded-xl  transition-all flex ease-linear hover:scale-[]' onMouseEnter={() => setImage(data.images.length > 1 ? data.images[1] : image)} onMouseLeave={() => setImage(data.images[0])} />
+                <h3 className='Futura text-nowrap overflow-hidden text-[16px] text-slate-800 text-left'>{data.title[0] + data.title.substring(1).toLowerCase()}</h3>
+                <p className='Twentieth-Century text-left text-sm text-slate-600'>INR : {data.price}</p>
             </div>
         </Link>
     )

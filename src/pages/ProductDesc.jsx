@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useLocation, useParams } from 'react-router-dom';
-import ProdImage, { SimilarProd } from "@/components/custom/ProdImage";
-import { prods } from "../data/proddData";
 import Bag from "@/components/custom/Bag";
+import ProdImage, { SimilarProd } from "@/components/custom/ProdImage";
+import { useState } from "react";
+import { useParams } from 'react-router-dom';
+import { prods } from "../data/proddData";
 
 
 
@@ -14,7 +14,7 @@ const ProductDesc = () => {
 	const handleCheck = () => {
 		setShowResult(true);
 	};
-	
+
 
 	const [size, setSize] = useState();
 
@@ -30,14 +30,14 @@ const ProductDesc = () => {
 					scrollbarWidth: 'none',
 					msOverflowStyle: 'none',
 				}}>
-				<h1 className="Futura flex justify-center items-center md:flex md:justify-start md:items-start">{data.title}</h1>
 
+				<h1 className="Futura text-3xl flex justify-center items-center md:flex md:justify-start md:items-start">{data.title}</h1>
 				<div class="Twentieth-Century flex flex-col items-center md:flex-col md:items-start">
 					<h1 class="text-base md:text-xl leading-6 text-center md:text-left" style={{ color: "#1c1d1d" }}>INR {data.price}</h1>
 					<h1 class="text-sm leading-5 text-center md:text-left">(inc. of all taxes)</h1>
 				</div>
 
-				<div className="grid gap-2">
+				<div className="grid gap-2 text-left">
 					{data.offers.map((offer, idx) => (
 						<div className="flex gap-2 items-center">
 							<img src="https://www.snitch.co.in/cdn/shop/files/offer_icon-1_20x.png?v=1615371278/" />
@@ -48,19 +48,18 @@ const ProductDesc = () => {
 								<p className="Twentieth-Century">{offer.code}</p>
 							</div>
 						</div>
-
 					))}
 				</div>
 				<hr></hr>
 				<div className="flex-col gap-4 sm:gap-4 justify-center items-center md:flex md:justify-start md:items-start">
-					<div className="w-80 "><SimilarProd prods={prods} /></div>
+					<div className="gap-2"><SimilarProd prods={prods} /></div>
 					<div className="text-center md:text-left">
 						<p className="pb-3 pt-3">SELECT A SIZE</p>
 						<div className="flex flex-wrap gap-3 justify-center md:justify-start">
 							{data.sizes.map((Size, idx) => (
 								<div key={idx} className="flex gap-2 items-center">
 									<div onClick={() => setSize(Size)} className="items-center h-8 w-8 border border-black rounded cursor-pointer">
-										<p className={size==Size ? "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer bg-black text-green-400" : "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer hover:bg-black hover:text-white"} >{Size}</p>
+										<p className={size == Size ? "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer bg-black text-green-400" : "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer hover:bg-black hover:text-white"} >{Size}</p>
 									</div>
 								</div>
 							))}
@@ -72,14 +71,14 @@ const ProductDesc = () => {
 					<img className="h-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ23SZXYidHA1WCt0pf3bzrYmNP95A1lHs7Q&s" />SIZE CHART</button>
 				<dialog id="my_modal_4" className="modal ">
 					<div className="modal-box w-11/12 h-[450px] max-w-4xl p-2 pt-4 ">
-						<p className="text-center">{data.title}</p>
+						<p className="text-center ">{data.title}</p>
 						<h6 className="text-center text-xs">Size Charts
 						</h6>
 						<div className="w-110%">
 							<hr className="bold-hr" />
 						</div>
 						<form method="dialog">
-							<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 ">✕</button>
+							<button className="btn btn-sm btn-circle btn-ghost absolute right-1 sm:right-2 top-2 ">✕</button>
 						</form>
 						<div className="h-full w-full p-2 mt-4">
 							<div className="p-1">
@@ -204,15 +203,17 @@ const ProductDesc = () => {
 							<span className="label-text">Estimated Delivery Date & COD Checker
 							</span>
 						</div>
-						<div className="flex w-full">
+						<div className="flex flex-col w-full sm:flex-row">
 							<input
-								type="text" placeholder="Enter your pincode" className="input input-bordered flex-1 mr-4"
+								type="text"
+								placeholder="Enter your pincode"
+								className=" input input-bordered mb-2 sm:mr-4 "
 							/>
 							<button
 								className="btn btn-primary bg-black hover:bg-black text-white"
 								onClick={handleCheck}
 							>
-								check
+								Check
 							</button>
 						</div>
 
