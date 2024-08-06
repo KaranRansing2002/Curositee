@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProdImage = ({ images }) => {
@@ -156,7 +156,7 @@ const ProdImage = ({ images }) => {
               onClick={(e) => {
                 closeLightbox();
               }}
-              className="absolute mt-[100%] right-0 mr-[200px] p-2 text-3xl text-black bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full text-[26px] w-12 h-12 flex items-center justify-center"
+              className="absolute mt-[100%] sm:right-0 sm:mr-[200px] p-2 text-3xl text-black bg-white bg-opacity-75 hover:bg-opacity-100 rounded-full text-[26px] w-12 h-12 flex items-center justify-center"
             >
               X
             </button>
@@ -178,23 +178,39 @@ const ProdImage = ({ images }) => {
 
 export default ProdImage;
 
-export const SimilarProd = ({ prods,cName }) => {
-  
+export const SimilarProd = ({ prods, cName, scrollable }) => {
   const navigate = useNavigate();
 
   const handleImageClick = (index) => {
-
     navigate(`/productDesc/${index}`);
   };
 
+  if (scrollable) {
+    return (
+      <div className="w-[300px] h-[150px]">
+        <div className="overflow-x-scroll element-class flex">
+          {prods.map((prod, ind) => (
+            <div key={ind} className="flex-shrink-0 mr-2">
+              <img
+                src={prod.images[0]}
+                className={cName ? cName : "w-[90px] h-[120px] cursor-pointer"}
+                alt={prod.title}
+                onClick={() => handleImageClick(ind)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  //else optional to write as code will continue if above is false
   return (
-    
-    <div className="h-full w-full flex gap-3 justify-center md:justify-start ">
+    <div className="h-full w-full flex gap-3 justify-center md:justify-start">
       {prods.map((prod, index) => (
-        <div key={index} className="">
+        <div key={index}>
           <img
             src={prod.images[0]}
-            className={cName ? cName : "h-full object-cover flex rounded border border-black cursor-pointer"}
+            className={cName ? cName : "h-[75px] w-[60px] flex rounded border border-black cursor-pointer"}
             alt={prod.title}
             onClick={() => handleImageClick(index)}
           />
