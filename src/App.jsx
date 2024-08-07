@@ -22,7 +22,7 @@ function App() {
           <Route path='/login' exact element={<Login/>} />
           <Route path='/account' exact element={<UserD/>} />
           <Route path='/product' exact element={<Products/>} />
-          <Route path='/Register' exact element={<Register/>}/>
+          <Route path='/register' exact element={<Register/>}/>
           <Route path='/productDesc/:index' exact element={<ProductDesc/>} />
         </Routes>
     </div>
