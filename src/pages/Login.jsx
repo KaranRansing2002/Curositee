@@ -20,7 +20,7 @@ function Login() {
 
                     </CardTitle>
                     <CardDescription>
-                        <p>New user <a href="/login">Register here</a> </p>
+                        <p>New user <a href="/Register">Register here</a> </p>
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

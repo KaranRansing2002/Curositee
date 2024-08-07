@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/custom/Navbar'
 import Home from './pages/Home'
 import ProductDesc from './pages/ProductDesc'
+import Register from './pages/Register'
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' exact element={<Login/>} />
           <Route path='/account' exact element={<UserD/>} />
           <Route path='/product' exact element={<Products/>} />
+          <Route path='/Register' exact element={<Register/>}/>
           <Route path='/productDesc/:index' exact element={<ProductDesc/>} />
         </Routes>
     </div>

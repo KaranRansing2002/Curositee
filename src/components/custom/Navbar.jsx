@@ -45,12 +45,12 @@ const Navbar = () => {
                             </div>
                         </SheetHeader>
                         <div className="grid gap-8 p-6 mt-6">
+                            <Link to='/' className='font-mono border-b'>NEW ARRIVALS</Link>
                             <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
+                            <Link to='/' className='font-mono border-b'>SHOP</Link>
+                            <Link to='/' className='font-mono border-b'>USER ACCOUNT</Link>
+                            <Link to='/' className='font-mono border-b'>WISHLIST</Link> 
+                            <Link to='/' className='font-mono border-b'>Logout</Link>
                         </div>
                         {/* <SheetFooter>
                             <SheetClose asChild>
