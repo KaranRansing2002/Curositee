@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import {Link} from 'react-router-dom'
 import {
     Card,
     CardContent,
@@ -20,7 +21,7 @@ function Login() {
 
                     </CardTitle>
                     <CardDescription>
-                        <p>New user <a href="/Register">Register here</a> </p>
+                        <p>New user <Link to="/register">Register here</Link> </p>
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
