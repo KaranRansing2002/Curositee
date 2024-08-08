@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
  
-export function SelectD({items,value}) {
+export function SelectD({ items , value , onChange,initalVal }) {
   return (
     <Select>
       <SelectTrigger className="w-[70px]">
@@ -19,8 +19,8 @@ export function SelectD({items,value}) {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>{value}</SelectLabel>
-          {items.map((date) => (
-              <SelectItem value={value}>{date}</SelectItem>
+          {items.map((val) => (
+              <SelectItem key={val} value={val} onclick={() => onChange(val)}>{val}</SelectItem>
           ))};
         </SelectGroup>
       </SelectContent>

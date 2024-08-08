@@ -13,12 +13,11 @@ import { Label } from "@/components/ui/label"
 import * as React from 'react'
 function Login() {
     return (
-        <div className='p-10 md:h-screen flex items-center justify-center'>
+        <div className= 'md:h-screen flex items-center justify-center'>
             <Card>
                 <CardHeader>
                     <CardTitle>
                         <h1>Login</h1>
-
                     </CardTitle>
                     <CardDescription>
                         <p>New user <Link to="/register">Register here</Link> </p>

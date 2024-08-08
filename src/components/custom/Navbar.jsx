@@ -40,7 +40,7 @@ const Navbar = () => {
                     <SheetContent side="left" className=''>
                         <SheetHeader>
                             <div className='flex gap-2 items-center'>
-                                <div className='rounded-full bg-slate-300 p-3'><User/></div>
+                                <div className='rounded-full bg-slate-300 p-3 text-2xl'><User/></div>
                                 <Link to='/login'><h2>Login</h2></Link>
                             </div>
                         </SheetHeader>

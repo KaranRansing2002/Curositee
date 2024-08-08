@@ -7,10 +7,20 @@ import { SelectD } from "./mySelect"
 import { Button } from "../ui/button";
 import { GenderRadio } from "./GenderRadio";
 import EditIcon from "@/icons/editIcon";
+import { useState } from "react";
 
-export default function UserDetails() {
+export default function UserDetails({visibleButton = false,title=''}) {
+     const [FirstName,setFirstName] = useState('');
+     const [LastName,setLastName] = useState('');
+     const [Email,setEmail] = useState('');
+     const [PhoneNo,setPhoneNo] = useState('');
+     const [Date,setDate] = useState('Date');
+     const [Year,setYear] = useState('Year');
+     const [Month,setMonth] = useState('month');
+
+     const [isButtonVisible,setVisibility] = useState(visibleButton);
      const DateArr = [];
-     const Month = ['January','Febuary','March','April','May','June','july','August','September','October','November','December'];
+     const allMonth = ['January','Febuary','March','April','May','June','july','August','September','October','November','December'];
      for(var i = 1; i <=30 ; i++){
           DateArr.push(i);
      }
@@ -18,14 +28,16 @@ export default function UserDetails() {
      for(var i = 1970; i <= 2024; i++){
           yearArr.push(i);
      }
-     
+     const buttonClick = () => {
+           setVisibility(!isButtonVisible);
+     }
      return (
           <div>
-          <h1 className="mb-5 text-lg">Good Morning User!</h1>
+          <h1 className="mb-5 text-lg">{title}</h1>
           <Card>
                <CardContent>
                     <div className="flex p-0 m-0  relative mt-1 left-4 justify-end">
-                        <button><EditIcon/></button>
+                        <button onClick={buttonClick}><EditIcon/></button>
                     </div>
                     <div className="flex flex-row p-1">
                          <div className="m-1">
@@ -34,8 +46,9 @@ export default function UserDetails() {
                                         lable: "First Name",
                                         type: "text",
                                         id: '01',
-                                        placeholder: "First Name"
+                                        placeholder: "First Name",
                                    }}
+                                   onChange ={(e) => setFirstName(e.target.value)}
                               />
                          </div>
                          <div className="m-1">
@@ -78,19 +91,22 @@ export default function UserDetails() {
                         <div className="mr-3">
                           <SelectD
                              items={DateArr}
-                             value = "Date"
+                             value = {Date}
+                             onChange={setDate}
                           />
                         </div>
                         <div className="mr-3">
                           <SelectD
-                             items={Month}
-                             value = "MM"
+                             items={allMonth}
+                             value = {Month}
+                             onChange={setMonth}
                           />
                         </div>
                         <div className="mr-3">
                           <SelectD className=""
                              items={yearArr}
-                             value = "YYYY"
+                             value = {Year}
+                             onChange={setYear}
                           />
                         </div>
                     </div>
@@ -102,8 +118,8 @@ export default function UserDetails() {
                          item3={'Others'}
                          />
                     </div>
-                    <div className="hidden mt-4">
-                         <Button>Save</Button>
+                    <div className="mt-4">
+                        {isButtonVisible && <Button onClick={buttonClick}>Save</Button>} 
                     </div>
                </CardContent>
           </Card >
