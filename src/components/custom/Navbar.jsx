@@ -44,7 +44,7 @@ const Navbar = () => {
                                 <Link to='/login'><h2>Login</h2></Link>
                             </div>
                         </SheetHeader>
-                        <div className="grid gap-8 p-6 mt-6 text-xl">
+                        <div className="grid gap-8 p-6 mt-6">
                             <Link to='/' className='font-mono border-b'>NEW ARRIVALS</Link>
                             <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
                             <Link to='/' className='font-mono border-b'>SHOP</Link>

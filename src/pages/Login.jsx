@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 import {
     Card,
     CardContent,
@@ -10,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import * as React from 'react'
-import { Link } from "react-router-dom"
 function Login() {
     return (
         <div className= 'md:h-screen flex items-center justify-center'>
