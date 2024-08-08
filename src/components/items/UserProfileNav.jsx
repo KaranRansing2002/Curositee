@@ -7,6 +7,7 @@ import WishListIcon from "@/icons/WishIcon"
 import SearchIcon from "@/icons/SearchIcon"
 import PasswordIcon from "@/icons/passwordIcon"
 import CartIcon from "@/icons/ShoppingBagIcon"
+import { Link } from "react-router-dom"
 export default function UserProfileNav({setEve}) {
     return (
         <div className='flex flex-col justify-center '>
@@ -23,41 +24,41 @@ export default function UserProfileNav({setEve}) {
             <div className='flex justify-center'>
                 <Card>
                     <CardContent>
-                        <div className="grid grid-cols-1 gap-8 divide-y text-xs p-3 mt-3 ">
+                        <div className="grid grid-cols-1 divide-y text-xs">
                             <div className="">
                                 <div className="flex flex-row m-1 pt-6" onClick={()=>setEve(0)}>
                                     <UserIcon />
-                                    <a href="#"><p className="p-1">My Profile</p></a>
+                                    <Link><p className="p-1">My Profile</p></Link>
                                 </div>
                                 <div className="flex flex-row m-1" onClick={()=>setEve(1)}>
                                     <AddressIcon />
-                                    <a href="#"><p className="p-1">Delivery Address</p></a>
+                                    <Link><p className="p-1">Delivery Address</p></Link>
                                 </div>
                             </div>
                             <div className="">
-                                <div className="flex flex-row m-1">
+                                <div className="flex flex-row m-1" onClick={()=>setEve(2)}>
                                     <CartIcon />
-                                    <a href="#"><p className="p-1">My Orders</p></a>
+                                    <Link><p className="p-1">My Orders</p></Link>
                                 </div>
                             </div>
                             <div className="">
                                 <div className="flex flex-row m-1">
                                     <WishListIcon/>
-                                    <a href="#"><p className="p-1">My WishList</p></a>
+                                    <Link to='/wishList'><p className="p-1">My WishList</p></Link>
                                 </div>
                                 <div className="flex flex-row m-1">
                                     <SearchIcon/>
-                                    <a href="#"><p classsName="p-1">Recently Viewed</p></a>
+                                    <Link to='/'><p classsName="p-1">Recently Viewed</p></Link>
                                 </div>
                             </div>
                             <div className="">
                                 <div className="flex flex-row m-1">
                                     <PasswordIcon/>
-                                    <a href="#"><p>Change Password</p></a>
+                                    <Link to='/register'><p>Change Password</p></Link>
                                 </div>  
                                 <div className="flex flex-row m-1">
-                                    <LogOutIcon className="mt-10" />
-                                    <a href="#"><p className="mt-10 p-1">Log Out</p></a>
+                                    <LogOutIcon className="" />
+                                    <Link><p className="p-1">Log Out</p></Link>
                                 </div> 
                             </div>
                         </div>

@@ -10,17 +10,17 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import * as React from 'react'
+import { Link } from "react-router-dom"
 function Login() {
     return (
-        <div className='p-10 md:h-screen flex items-center justify-center'>
+        <div className= 'md:h-screen flex items-center justify-center'>
             <Card>
                 <CardHeader>
                     <CardTitle>
                         <h1>Login</h1>
-
                     </CardTitle>
                     <CardDescription>
-                        <p>New user <a href="/login">Register here</a> </p>
+                        <p>New user <Link to="/register">Register here</Link> </p>
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

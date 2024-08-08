@@ -15,19 +15,29 @@ function Products({ }) {
     const colors = ['Black', 'White', 'Red', 'Grey', 'SkyBlue', 'Cream', 'Pink', 'Brown', 'Crimson', 'Green', 'Mat Black', 'Snow White', 'Parrot', 'Ocean'];
     const prices = ['under-999', 'INR-999 to INR-1999', 'INR-1999 to INR-2999', 'INR-3000 above'];
     const ScrollBars = [ProductSizes, Catagories, Fits, colors, prices];
-    const Products = [{ src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/img2.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },];
+    const Products = [
+    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '1500', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '1300', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '1456', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '456', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
+
+    ];
 
     return (
-        <div class="grid grid-cols-12 ">
-            <div className="hidden sm:block md:col-span-2 m-2">
+        <div class="grid grid-cols-12">
+            <div className="hidden sm:block md:col-span-2 m-2 pt-3 pb-3">
                 <div className="justify-center">
                     <Accordion type="single" collapsible className="mr-2">
                         <AccordionItem value="item-1">

@@ -40,17 +40,17 @@ const Navbar = () => {
                     <SheetContent side="left" className=''>
                         <SheetHeader>
                             <div className='flex gap-2 items-center'>
-                                <div className='rounded-full bg-slate-300 p-3'><User/></div>
+                                <div className='rounded-full bg-slate-300 p-3 text-2xl'><User/></div>
                                 <Link to='/login'><h2>Login</h2></Link>
                             </div>
                         </SheetHeader>
-                        <div className="grid gap-8 p-6 mt-6">
+                        <div className="grid gap-8 p-6 mt-6 text-xl">
+                            <Link to='/' className='font-mono border-b'>NEW ARRIVALS</Link>
                             <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
-                            <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
+                            <Link to='/' className='font-mono border-b'>SHOP</Link>
+                            <Link to='/' className='font-mono border-b'>USER ACCOUNT</Link>
+                            <Link to='/' className='font-mono border-b'>WISHLIST</Link> 
+                            <Link to='/' className='font-mono border-b'>Logout</Link>
                         </div>
                         {/* <SheetFooter>
                             <SheetClose asChild>

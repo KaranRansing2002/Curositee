@@ -4,24 +4,24 @@ import { InputWithLabel } from "./Takeinput"
 
 export default function UserAddress() {
     return (
-        <div className="flex mt-3">
+        <div className="flex mt-9">
             <Card>
                 <CardContent className="flex flex-col m-4">
                     <div className="grid grid-cols-2 gap-4">
                         <InputWithLabel
                             property={{
-                                lable: "First Name",
+                                lable: "Street",
                                 type: "text",
-                                id: 'fName',
-                                placeholder: "First Name"
+                                id: 'sName',
+                                placeholder: "Street Name"
                             }}
                         />
                         <InputWithLabel
                             property = {{
-                                lable: "LastName Name",
+                                lable: "State",
                                 type: "text",
-                                id: 'lname',
-                                placeholder: "Last Name"
+                                id: 'stateName',
+                                placeholder: "State"
                             }}
                         />
                         <InputWithLabel 
