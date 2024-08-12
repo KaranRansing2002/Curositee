@@ -57,7 +57,7 @@ export default function UserProfileNav({setEve}) {
                                     <Link to='/register'><p>Change Password</p></Link>
                                 </div>  
                                 <div className="flex flex-row m-1">
-                                    <LogOutIcon className="" />
+                                    <LogOutIcon />
                                     <Link><p className="p-1">Log Out</p></Link>
                                 </div> 
                             </div>
