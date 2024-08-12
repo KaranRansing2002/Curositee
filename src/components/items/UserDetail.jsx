@@ -8,6 +8,8 @@ import { Button } from "../ui/button";
 import { GenderRadio } from "./GenderRadio";
 import EditIcon from "@/icons/editIcon";
 import { useState } from "react";
+import axios from 'axios';
+
 
 export default function UserDetails({visibleButton = false,title=''}) {
      const [FirstName,setFirstName] = useState('');
@@ -30,6 +32,12 @@ export default function UserDetails({visibleButton = false,title=''}) {
      }
      const buttonClick = () => {
            setVisibility(!isButtonVisible);
+           axios.post('http://localhost:5173/data',{
+               FirstName: FirstName,
+               LatName : LastName,
+               Email : Email,
+               PhoneNo : PhoneNo,
+           })
      }
      return (
           <div>
@@ -59,6 +67,7 @@ export default function UserDetails({visibleButton = false,title=''}) {
                                         id: '02',
                                         placeholder: "Last Name"
                                    }}
+                                   onChange ={(e) => setLastName(e.target.value)}
                               />
                          </div>
                     </div>
@@ -71,6 +80,7 @@ export default function UserDetails({visibleButton = false,title=''}) {
                                         id: '03',
                                         placeholder: "email"
                                    }}
+                                   onChange ={(e) => setEmail(e.target.value)}
                               />
                          </div>
                          <div className="m-1">
@@ -81,6 +91,7 @@ export default function UserDetails({visibleButton = false,title=''}) {
                                         id: '04',
                                         placeholder: "+91-8888888888"
                                    }}
+                                   onChange ={(e) => setPhoneNo(e.target.value)}
                               />
                          </div>
                     </div>

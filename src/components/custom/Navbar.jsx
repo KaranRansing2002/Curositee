@@ -28,7 +28,7 @@ import { Button } from '../ui/button'
 
 
 const Navbar = () => {
-    
+
     return (
         <Sheet>
             <div className='relative'>
@@ -40,7 +40,7 @@ const Navbar = () => {
                     <SheetContent side="left" className=''>
                         <SheetHeader>
                             <div className='flex gap-2 items-center'>
-                                <div className='rounded-full bg-slate-300 p-3 text-2xl'><User/></div>
+                                <div className='rounded-full bg-slate-300 p-3 text-2xl'><User /></div>
                                 <Link to='/login'><h2>Login</h2></Link>
                             </div>
                         </SheetHeader>
@@ -49,7 +49,7 @@ const Navbar = () => {
                             <Link to='/' className='font-mono border-b'>BEST SELLING</Link>
                             <Link to='/' className='font-mono border-b'>SHOP</Link>
                             <Link to='/' className='font-mono border-b'>USER ACCOUNT</Link>
-                            <Link to='/' className='font-mono border-b'>WISHLIST</Link> 
+                            <Link to='/' className='font-mono border-b'>WISHLIST</Link>
                             <Link to='/' className='font-mono border-b'>Logout</Link>
                         </div>
                         {/* <SheetFooter>
@@ -65,13 +65,22 @@ const Navbar = () => {
                         <Link to='/account'><User className='cursor-pointer' /></Link>
                         <Search className='cursor-pointer' />
                         <Heart className='cursor-pointer' />
-                        <div className='cursor-pointer'><CartIcon /></div>
+                        <div>
+
+                            <div className="drawer-content"  >
+                                <label htmlFor="my-drawer" className="cursor-pointer">
+                                    <CartIcon />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className='cursor-pointer'></div>
                     </div>
                     <div className='sm:hidden'>
                         <Search className='cursor-pointer' />
                     </div>
                 </div>
-            
+
             </div>
         </Sheet>
     )

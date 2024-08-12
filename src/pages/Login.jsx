@@ -20,7 +20,7 @@ function Login() {
                         <h1>Login</h1>
                     </CardTitle>
                     <CardDescription>
-                        <p>New user <Link to="/register">Register here</Link> </p>
+                        <section>New user <Link to="/register">Register here</Link> </section>
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -29,10 +29,9 @@ function Login() {
                         <Input type="email" id="email" placeholder="Email" />
                     </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5 p-1">
-                        <Label htmlFor="email">Password</Label>
-                        <Input type="password" id="email" placeholder="Password" />
+                        <Label htmlFor="password">Password</Label>
+                        <Input type="password" id="password" placeholder="Password" />
                     </div>
-                    
                 </CardContent>
                 <CardFooter>
                     <Button>Login</Button>
