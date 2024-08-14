@@ -1,4 +1,4 @@
-import { Heart, MenuIcon, Search, User, User2, User2Icon } from 'lucide-react'
+import { Heart, MenuIcon, Search, Store, User, User2, User2Icon } from 'lucide-react'
 import React, { useState } from 'react'
 import logo from '../../icons/blackoption.webp'
 import CartIcon from '@/icons/ShoppingBagIcon'
@@ -12,7 +12,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import {
     Sheet,
@@ -25,10 +25,16 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from '../ui/button'
+import { UserContext } from '@/App'
 
 
 const Navbar = () => {
 
+    const {loggedUser,setLoggedUser} = React.useContext(UserContext);
+    console.log(loggedUser);
+
+    const navigate=useNavigate();
+    
     return (
         <Sheet>
             <div className='relative'>
@@ -61,8 +67,9 @@ const Navbar = () => {
                     <Link to='/' className='flex-1 sm:pl-28 flex justify-center'>
                         <img src={logo} className='h-12' />
                     </Link>
-                    <div className='sm:flex gap-4 hidden'>
-                        <Link to='/account'><User className='cursor-pointer' /></Link>
+                    <div className='sm:flex gap-4 hidden items-center'>
+                        {loggedUser && loggedUser.role=='VENDOR' && <Link to='/vendor' className='flex gap-2 items-end '><Store className='cursor-pointer' /><p>dashboard</p></Link>}
+                        {loggedUser && <Link to='/account'><User className='cursor-pointer' /></Link>}
                         <Search className='cursor-pointer' />
                         <Heart className='cursor-pointer' />
                         <div>
@@ -73,7 +80,7 @@ const Navbar = () => {
                                 </label>
                             </div>
                         </div>
-
+                        {loggedUser ? <Button size="sm" onClick={()=>{sessionStorage.clear();setLoggedUser(null); navigate('/');}}>logout</Button> : <Link to='/login'><Button size="sm">Sign-in</Button></Link>}
                         <div className='cursor-pointer'></div>
                     </div>
                     <div className='sm:hidden'>

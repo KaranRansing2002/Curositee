@@ -37,7 +37,7 @@ function Products({ }) {
 
     return (
         <div>
-            <div className="hidden sm:block md:col-span-2 m-2 pt-3 pb-3">
+            <div className="hidden sm:block md:col-span-2 m-2 pt-3 pb-3 ">
                 <div className="justify-center">
                     <Accordion type="single" collapsible className="mr-2">
                         <AccordionItem value="item-1">

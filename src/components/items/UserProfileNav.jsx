@@ -1,8 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { InputWithLabel } from "./Takeinput"
-import UserIcon from "@/icons/userIcon"
 import AddressIcon from "@/icons/AddressIcon"
-import { LogOutIcon, ShoppingBagIcon } from "lucide-react"
+import { LogOutIcon, ShoppingBagIcon, User } from "lucide-react"
 import WishListIcon from "@/icons/WishIcon"
 import SearchIcon from "@/icons/SearchIcon"
 import PasswordIcon from "@/icons/passwordIcon"
@@ -27,7 +26,7 @@ export default function UserProfileNav({setEve}) {
                         <div className="grid grid-cols-1 divide-y text-xs">
                             <div className="">
                                 <div className="flex flex-row m-1 pt-6" onClick={()=>setEve(0)}>
-                                    <UserIcon />
+                                    <User />
                                     <Link><p className="p-1">My Profile</p></Link>
                                 </div>
                                 <div className="flex flex-row m-1" onClick={()=>setEve(1)}>

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { prods } from '@/data/proddData';
 const ProductItem = ({index}) => {
-    const data = prods[index];
+    
+    const [data,setData] = useState(prods[index])
+    
+    if(!data) return;
+    
     return (
         <div className="flex mb-6 mt-4">
-            <img src={data.images[0]} alt="Orange Polo T-Shirt" className="w-24 h-32 object-cover mr-4" />
+            <img src={data?.images[0]} alt="Orange Polo T-Shirt" className="w-24 h-32 object-cover mr-4" />
             <div>
                 <h2 className="font-semibold">{data.title}</h2>
                 <p>Color: {data.color}</p>
