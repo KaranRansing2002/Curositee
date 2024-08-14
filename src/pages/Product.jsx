@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { useState,useEffect} from 'react';
 import MyScrollArea from "@/components/items/MyScrolArea";
 import ProductList from "@/components/items/ProductList";
 import {
@@ -9,34 +11,28 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 function Products({ }) {
+    const [Products,setProducts] = useState([]);
     const ProductSizes = ["S", "M", "L", "XL", "XXL"];
     const Catagories = ['Tshirs', 'Oversized Tshirt', 'Polos', 'Shirts', 'OverSized Shirt', 'Full Sleaves'];
     const Fits = ['Slim Fit', 'Relaxed Fit', 'Oversized Fit', 'Skinny Fit', 'Baggy Fit', 'Custom Fit'];
     const colors = ['Black', 'White', 'Red', 'Grey', 'SkyBlue', 'Cream', 'Pink', 'Brown', 'Crimson', 'Green', 'Mat Black', 'Snow White', 'Parrot', 'Ocean'];
     const prices = ['under-999', 'INR-999 to INR-1999', 'INR-1999 to INR-2999', 'INR-3000 above'];
     const ScrollBars = [ProductSizes, Catagories, Fits, colors, prices];
-    const Products = [
-    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '1500', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '1300', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '1456', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Checked Cotton Shirt', price: '456', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
-    { src: "/src/assets/snitchImage.png", name: 'Tshirt', price: 'Price', sizes: ['S', 'L', 'M', 'XL', 'XXL'] },
 
-    ];
-
+    useEffect(() => {
+        axios.get('http://localhost:8080/product/filter')
+            .then(response => {
+                console.log(response.data);
+                console.log("mii")
+                setProducts(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            });
+    }, []);
+    
     return (
-        <div>
+        <div class="grid grid-cols-12">
             <div className="hidden sm:block md:col-span-2 m-2 pt-3 pb-3 ">
                 <div className="justify-center">
                     <Accordion type="single" collapsible className="mr-2">
