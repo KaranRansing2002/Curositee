@@ -21,3 +21,8 @@ export async function login(user) {
   // read JSON data (response)
   return response
 }
+
+export async function filter(data){
+  const response = await axios.post(`${con}`)
+}
+ 
