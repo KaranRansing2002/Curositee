@@ -34,7 +34,7 @@ function App() {
           <Route path="/register" exact element={<Register />} />
           <Route path="/product" exact element={<Products />} />
           <Route path="/register" exact element={<Register />} />
-          <Route path="/productDesc/:index" exact element={<ProductDesc />} />
+          <Route path="/product/:index" exact element={<ProductDesc />} />
           <Route path="/vendor" exact element={<Vendor />} />
         </Routes>
         <ToastContainer />

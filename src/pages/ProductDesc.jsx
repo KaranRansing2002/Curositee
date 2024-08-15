@@ -1,65 +1,101 @@
-import Bag from "@/components/custom/Bag";
-import ProdImage, { SimilarProd } from "@/components/custom/ProdImage";
-import { useState } from "react";
+import ProdImage from "@/components/custom/ProdImage";
+import { offers } from "@/data/proddData";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { prods } from "../data/proddData";
-
-
-
 const ProductDesc = () => {
 	const { index } = useParams();
-	console.log(index);// Get the index from the query string
-	const data = prods[index];
+	const [data, setProductData] = useState(null);
+	const [size, setSize] = useState();
 	const [showResult, setShowResult] = useState(false);
+
+	useEffect(() => {
+		const fetchProductDetails = async () => {
+			try {
+				const response = await axios.get(`http://localhost:8080/productDetails?imgid=${index}`);
+				setProductData(response.data);
+			} catch (error) {
+				console.error("Error fetching product details:", error);
+			}
+		};
+
+		if (index) {
+			fetchProductDetails();
+		}
+	}, [index]);
+
 	const handleCheck = () => {
 		setShowResult(true);
 	};
 
-
-	const [size, setSize] = useState();
+	if (!data) {
+		return <p>Loading...</p>;
+	}
 
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 p-2  ">
-			<div className=" p-2">
-				<ProdImage images={data.images} />
+		<div className="grid grid-cols-1 md:grid-cols-2 p-2">
+			<div className="p-2">
+				<ProdImage
+				  images={data.imgIds}
+				  Index={index}
+				 />
 			</div>
-			<div className="p-4 flex flex-col gap-8"
+			<div className="p-4 flex flex-col gap-6"
 				style={{
 					maxHeight: '904px',
 					overflowY: 'auto',
 					scrollbarWidth: 'none',
 					msOverflowStyle: 'none',
 				}}>
+				<div>
+					<h1 className="Futura text-3xl flex justify-center items-center md:flex md:justify-start md:items-start pb-2">
+						{data.prod.productName} - {data.prod.categoryName}
+					</h1>
+					<div className="rating float-start">
+						{[1, 2, 3, 4, 5].map((value) => (
+							<input
+								key={value}
+								type="radio"
+								name="rating-2"
+								className="mask mask-star-2 bg-yellow-400 scale-75 cursor-auto"
+								checked={value === data.rating}
+								readOnly
+							/>
+						))}
+					</div>
+				</div>
 
-				<h1 className="Futura text-3xl flex justify-center items-center md:flex md:justify-start md:items-start">{data.title}</h1>
-				<div class="Twentieth-Century flex flex-col items-center md:flex-col md:items-start">
-					<h1 class="text-base md:text-xl leading-6 text-center md:text-left" style={{ color: "#1c1d1d" }}>INR {data.price}</h1>
-					<h1 class="text-sm leading-5 text-center md:text-left">(inc. of all taxes)</h1>
+				<div className="flex flex-col items-center md:flex-col md:items-start">
+					<h1 className="Twentieth-Century text-base md:text-xl leading-6 text-center md:text-left" style={{ color: "#1c1d1d" }}>INR {data.prod.price}</h1>
+					<h1 className="text-sm leading-5 text-center md:text-left">(inc. of all taxes)</h1>
 				</div>
 
 				<div className="grid gap-2 text-left">
-					{data.offers.map((offer, idx) => (
-						<div className="flex gap-2 items-center">
-							<img src="https://www.snitch.co.in/cdn/shop/files/offer_icon-1_20x.png?v=1615371278/" />
+					{offers.map((offer, idx) => (
+						<div key={idx} className="flex gap-2 items-center">
+							<img src="https://www.snitch.co.in/cdn/shop/files/offer_icon-1_20x.png?v=1615371278" alt="offer-icon" />
 							<div className="items-center">
-								<p className="Twentieth-Century">Get this for <span className="font-bold">{offer.title}</span>
-								</p>
-								<p className="Twentieth-Century">{offer.desc}</p>
+								<p className="Twentieth-Century">
+									Get this for <span className="font-bold">INR {Math.floor(offer.ratio * data.prod.price)}</span>
+								</p>								<p className="Twentieth-Century">{offer.desc}</p>
 								<p className="Twentieth-Century">{offer.code}</p>
 							</div>
 						</div>
 					))}
 				</div>
-				<hr></hr>
+				<hr />
+
 				<div className="flex-col gap-4 sm:gap-4 justify-center items-center md:flex md:justify-start md:items-start">
-					<div className="gap-2"><SimilarProd prods={prods} /></div>
+					<div className="gap-2">
+						{/* <SimilarProd prods={data.similarProds} /> */}
+					</div>
 					<div className="text-center md:text-left">
 						<p className="pb-3 pt-3">SELECT A SIZE</p>
 						<div className="flex flex-wrap gap-3 justify-center md:justify-start">
 							{data.sizes.map((Size, idx) => (
 								<div key={idx} className="flex gap-2 items-center">
 									<div onClick={() => setSize(Size)} className="items-center h-8 w-8 border border-black rounded cursor-pointer">
-										<p className={size == Size ? "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer bg-black text-green-400" : "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer hover:bg-black hover:text-white"} >{Size}</p>
+										<p className={size === Size ? "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer bg-black text-green-400" : "Twentieth-Century flex justify-center items-center h-full text-xl cursor-pointer hover:bg-black hover:text-white"}>{Size}</p>
 									</div>
 								</div>
 							))}
@@ -68,95 +104,78 @@ const ProductDesc = () => {
 				</div>
 
 				<button className="btn" onClick={() => document.getElementById('my_modal_4').showModal()}>
-					<img className="h-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ23SZXYidHA1WCt0pf3bzrYmNP95A1lHs7Q&s" />SIZE CHART</button>
-				<dialog id="my_modal_4" className="modal ">
-					<div className="modal-box w-11/12 h-[450px] max-w-4xl p-2 pt-4 ">
-						<p className="text-center ">{data.title}</p>
-						<h6 className="text-center text-xs">Size Charts
-						</h6>
-						<div className="w-110%">
-							<hr className="bold-hr" />
-						</div>
+					<img className="h-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ23SZXYidHA1WCt0pf3bzrYmNP95A1lHs7Q&s" alt="size-chart" />SIZE CHART</button>
+				<dialog id="my_modal_4" className="modal">
+					<div className="modal-box w-11/12 h-[450px] max-w-4xl p-2 pt-4">
+						<p className="text-center">{data.title}</p>
+						<h6 className="text-center text-xs">Size Charts</h6>
+						<hr className="bold-hr" />
 						<form method="dialog">
-							<button className="btn btn-sm btn-circle btn-ghost absolute right-1 sm:right-2 top-2 ">✕</button>
+							<button className="btn btn-sm btn-circle btn-ghost absolute right-1 sm:right-2 top-2">✕</button>
 						</form>
 						<div className="h-full w-full p-2 mt-4">
 							<div className="p-1">
 								<p>T-SHIRT SIZE CHART</p>
-
 							</div>
-							<div>
-								<table className="table max-w-full mt-2 ">
+							<table className="table max-w-full mt-2 ">
+								<tr className="hover:bg-slate-100">
+									<th></th>
+									<th>CHEST</th>
+									<th>SHOULDER</th>
+									<th>LENGTH</th>
+								</tr>
+								<tbody>
 									<tr className="hover:bg-slate-100">
-										<th></th>
-										<th>CHEST</th>
-										<th>SHOULDER</th>
-										<th>LENGTH</th>
+										<th className="hover:bg-slate-300">S</th>
+										<td className="hover:bg-slate-300">38</td>
+										<td className="hover:bg-slate-300">16</td>
+										<td className="hover:bg-slate-300">27</td>
 									</tr>
-									<tbody>
-										<tr className="hover:bg-slate-100">
-											<th className="hover:bg-slate-300">S</th>
-											<td className="hover:bg-slate-300">38</td>
-											<td className="hover:bg-slate-300">16</td>
-											<td className="hover:bg-slate-300">27</td>
-										</tr>
-										<tr className="hover:bg-slate-100">
-											<th className="hover:bg-slate-300">M</th>
-											<td className="hover:bg-slate-300">40</td>
-											<td className="hover:bg-slate-300">16.5</td>
-											<td className="hover:bg-slate-300">28</td>
-										</tr>
-										<tr className="hover:bg-slate-100">
-											<th className="hover:bg-slate-300">L</th>
-											<td className="hover:bg-slate-300">42</td>
-											<td className="hover:bg-slate-300">17</td>
-											<td className="hover:bg-slate-300">29</td>
-										</tr>
-										<tr className="hover:bg-slate-100">
-											<th className="hover:bg-slate-300">XL</th>
-											<td className="hover:bg-slate-300">44</td>
-											<td className="hover:bg-slate-300">17.5</td>
-											<td className="hover:bg-slate-300">30</td>
-										</tr>
-										<tr className="hover:bg-slate-100">
-											<th className="hover:bg-slate-300">XXL</th>
-											<td className="hover:bg-slate-300">46</td>
-											<td className="hover:bg-slate-300">18</td>
-											<td className="hover:bg-slate-300">31</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+									<tr className="hover:bg-slate-100">
+										<th className="hover:bg-slate-300">M</th>
+										<td className="hover:bg-slate-300">40</td>
+										<td className="hover:bg-slate-300">16.5</td>
+										<td className="hover:bg-slate-300">28</td>
+									</tr>
+									<tr className="hover:bg-slate-100">
+										<th className="hover:bg-slate-300">L</th>
+										<td className="hover:bg-slate-300">42</td>
+										<td className="hover:bg-slate-300">17</td>
+										<td className="hover:bg-slate-300">29</td>
+									</tr>
+									<tr className="hover:bg-slate-100">
+										<th className="hover:bg-slate-300">XL</th>
+										<td className="hover:bg-slate-300">44</td>
+										<td className="hover:bg-slate-300">17.5</td>
+										<td className="hover:bg-slate-300">30</td>
+									</tr>
+									<tr className="hover:bg-slate-100">
+										<th className="hover:bg-slate-300">XXL</th>
+										<td className="hover:bg-slate-300">46</td>
+										<td className="hover:bg-slate-300">18</td>
+										<td className="hover:bg-slate-300">31</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</dialog>
 
-				<Bag size={size} />
+				{/* <Bag size={size} /> */}
 
-				<button className="btn bg-white text-black border  border-black" onClick={() => document.getElementById('my_modal_3').showModal()}>
-					<img className="h-4" src="https://cdn.icon-icons.com/icons2/2761/PNG/512/love_heart_icon_176421.png" />
+				<button className="btn bg-white text-black border border-black" onClick={() => document.getElementById('my_modal_3').showModal()}>
+					<img className="h-4" src="https://cdn.icon-icons.com/icons2/2761/PNG/512/love_heart_icon_176421.png" alt="wishlist-icon" />
 					Add To Wishlist</button>
 				<dialog id="my_modal_3" className="modal p-4 h-[1000px]">
-					<div className="modal-box flex flex-col items-center justify-center sm:w-100%  sm:h-1/2 border border-black">
+					<div className="modal-box flex flex-col items-center justify-center sm:w-full sm:h-1/2 border border-black">
 						<form method="dialog">
 							<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
 						</form>
-						<img className="h-10 sm:h-10" src="https://cdn0.iconfinder.com/data/icons/apple-apps/100/Apple_Mail-512.png" />
+						<img className="h-10 sm:h-10" src="https://cdn0.iconfinder.com/data/icons/apple-apps/100/Apple_Mail-512.png" alt="email-icon" />
 						<h1 className="text-black sm:p-4 font-semibold text-lg text-center">What's Your Email?</h1>
-
-						<div><input
-							type="email"
-							placeholder="Email Address"
-							className="border h-[40px] w-full 
-            				sm:w-[350px] sm:h-[50px] 
-             			    md:h-[45px] md:w-[400px] md:text-lg"
-						/></div>
+						<input type="email" placeholder="Email Address" className="border h-[40px] w-full sm:w-[350px] sm:h-[50px] md:h-[45px] md:w-[400px] md:text-lg" />
 						<button className="btn bg-black text-white mt-6">Add To Wishlist</button>
 					</div>
-					<div>
-
-					</div>
-
 				</dialog>
 
 				<div>
@@ -165,10 +184,7 @@ const ProductDesc = () => {
 							<input type="checkbox" name="my-accordion-4" defaultChecked />
 							<div className="collapse-title text-xl font-medium">EMI / PAY IN 3 OFFERS</div>
 							<div className="collapse-content">
-								<p>or Pay ₹333 and rest later via
-									No Charges | upto Rs.200 discount
-									or 3 monthly payments of ₹333
-									FLAT Cashback ₹250
+								<p>or Pay ₹333 and rest later via No Charges | upto Rs.200 discount or 3 monthly payments of ₹333 FLAT Cashback ₹250
 									Or 3 interest free payments of ₹333
 								</p>
 							</div>
@@ -177,7 +193,7 @@ const ProductDesc = () => {
 							<input type="checkbox" name="my-accordion-4" />
 							<div className="collapse-title text-xl font-medium">DESCRIPTION</div>
 							<div className="collapse-content">
-								<p>{data.description}</p>
+								<p>{data.prod.productDesc}</p>
 							</div>
 						</div>
 						<div className="collapse collapse-arrow join-item border-base-300 border relative z-10">
@@ -207,7 +223,7 @@ const ProductDesc = () => {
 							<input
 								type="text"
 								placeholder="Enter your pincode"
-								className=" input input-bordered mb-2 sm:mr-4 "
+								className=" input input-bordered mb-2 sm:mr-4 text-white"
 							/>
 							<button
 								className="btn btn-primary bg-black hover:bg-black text-white"
@@ -224,8 +240,7 @@ const ProductDesc = () => {
 									<p className="mr-1">Expect delivery by</p><p className="text-green-500">{data.date}</p>
 								</span>
 								<span className="label-text-alt flex">
-									<img className="h-4 mr-2" src="https://cdn-icons-png.flaticon.com/512/4470/4470504.png" /><p className="mr-1">Cash on delivery</p> {data.Cash_on && (<p className="text-green-500">available</p>) || (<p className="text-red-500">not available</p>)}
-
+									<img className="h-4 mr-2" src="https://cdn-icons-png.flaticon.com/512/4470/4470504.png" /><p className="mr-1">Cash on delivery</p> (<p className="text-green-500">available</p>)
 								</span>
 							</div>
 						)}
