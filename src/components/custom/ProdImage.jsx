@@ -75,7 +75,7 @@ const ProdImage = ({ images,Index}) => {
       <div className="overflow-y-scroll element-class hidden sm:grid gap-2">
         {images.map((img, index) => (
           <div
-            className="h-36 cursor-pointer hover:scale-[0.95] transition-all ease-linear"
+            className="h-[215px] cursor-pointer hover:scale-[0.95] transition-all ease-linear"
             onClick={() => setImage(img)}
             key={index}
           >

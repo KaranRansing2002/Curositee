@@ -1,10 +1,27 @@
 import Hero from '@/components/custom/Hero'
 import { Button } from '@/components/ui/button'
-import { prods } from '@/data/proddData'
-import { useState } from 'react'
+//import { prods } from '@/data/proddData'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import axios from 'axios'
+
+
 const Home = () => {
+
+    const [TrendingProducts,setTrendingProducts] = useState([]);
+    
+    useEffect(() => {
+        axios.get('http://localhost:8080/orders/trending')
+            .then(response => {
+               // console.log(response.data);
+                setTrendingProducts(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            });
+    }, []);
+
     return (
         <div className='p-2'>
             <Hero />
@@ -19,8 +36,8 @@ const Home = () => {
 
             <div className='grid sm:grid-cols-5 grid-cols-2 gap-4 p-8'>
                 {
-                    prods.map((prod, index) => (
-                        <ProdCard key={index} ind={index} data={prod} />
+                    TrendingProducts.map((prod,index) => (
+                        <ProdCard key={prod.imgid} ind={prod.imgid} data={prod} />
                     ))
                 }
             </div>
@@ -54,13 +71,13 @@ const Catgeories = () => {
 
 
 const ProdCard = ({ data, ind }) => {
-    const [image, setImage] = useState(data.images[0]);
+    //const [image, setImage] = useState(data.images[0]);
     return (
-        <Link to={`/productDesc/${ind}`}>
+        <Link to={`/product/${ind}`}>
             <div className='flex flex-col cursor-pointer p-2 shadow-2xl rounded border border-slate-200' >
-                <img src={image} className='hover:brightness-75 rounded-xl  transition-all flex ease-linear hover:scale-[]' onMouseEnter={() => setImage(data.images.length > 1 ? data.images[1] : image)} onMouseLeave={() => setImage(data.images[0])} />
-                <h3 className='Futura text-nowrap overflow-hidden text-[16px] text-slate-800 text-left'>{data.title[0] + data.title.substring(1).toLowerCase()}</h3>
-                <p className='Twentieth-Century text-left text-sm text-slate-600'>INR : {data.price}</p>
+                <img src={`http://localhost:8000/image/${ind}`} className='hover:brightness-75 rounded-xl  transition-all flex ease-linear hover:scale-[]' onMouseEnter={() => setImage(data.images.length > 1 ? data.images[1] : image)} onMouseLeave={() => setImage(data.images[0])} />
+                {/* <h3 className='Futura text-nowrap overflow-hidden text-[16px] text-slate-800 text-left'>{data.title[0] + data.title.substring(1).toLowerCase()}</h3> */}
+                {/* <p className='Twentieth-Century text-left text-sm text-slate-600'>INR : {data.price}</p> */}
             </div>
         </Link>
     )

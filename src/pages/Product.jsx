@@ -13,14 +13,20 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 function Products({ }) {
     const [Products,setProducts] = useState([]);
     const ProductSizes = ["S", "M", "L", "XL", "XXL"];
-    const Catagories = ['Tshirs', 'Oversized Tshirt', 'Polos', 'Shirts', 'OverSized Shirt', 'Full Sleaves'];
-    const Fits = ['Slim Fit', 'Relaxed Fit', 'Oversized Fit', 'Skinny Fit', 'Baggy Fit', 'Custom Fit'];
+    const Catagories = ['T_Shirt','Polo', 'Shirt', 'Funky_Shirt'];
+    //const Fits = ['Slim Fit', 'Relaxed Fit', 'Oversized Fit', 'Skinny Fit', 'Baggy Fit', 'Custom Fit'];
     const colors = ['Black', 'White', 'Red', 'Grey', 'SkyBlue', 'Cream', 'Pink', 'Brown', 'Crimson', 'Green', 'Mat Black', 'Snow White', 'Parrot', 'Ocean'];
     const prices = ['under-999', 'INR-999 to INR-1999', 'INR-1999 to INR-2999', 'INR-3000 above'];
-    const ScrollBars = [ProductSizes, Catagories, Fits, colors, prices];
-
+    const ScrollBars = [ProductSizes, Catagories, colors, prices];
+    const [color,setColor] = useState(null);
+    const [category,setCategory] = useState(null);
+    const [price,setPrice] = useState([0,10000000]);
+    const [size,setSize] = useState(null);
+    const [urlQuery,setUrlQuery] = useState("");
     useEffect(() => {
-        axios.get('http://localhost:8080/product/filter')
+        const url = `http://localhost:8080/product/filter${urlQuery.length > 1 ? urlQuery : "" }`;
+        console.log(url);
+        axios.get(url)
             .then(response => {
                 console.log(response.data);
                 console.log("mii")
@@ -29,7 +35,30 @@ function Products({ }) {
             .catch(error => {
                 console.error('There was an error fetching the data!', error);
             });
-    }, []);
+    }, [urlQuery]);
+
+    
+
+    useEffect(()=>{
+        let q="?";
+        if(color)
+            q+=`color=${color.toUpperCase()}&`
+        
+        if(category)
+            q+=`category=${category.toUpperCase()}&`
+
+        if(size)
+            q+=`size=${size.toUpperCase()}&`
+
+        if(price)
+            q+=`price=${price[0]}&price=${price[1]}&`
+
+        q=q.slice(0,-1);
+        console.log(q);
+        
+        setUrlQuery(q);
+
+    },[size,category,color,price])
     
     return (
         <div class="grid grid-cols-12">
@@ -40,7 +69,7 @@ function Products({ }) {
                             <AccordionTrigger className="h-[40px]">Size</AccordionTrigger>
                             <AccordionContent>
                                 <ScrollArea className="h-[100px]">
-                                    <MyScrollArea items={ProductSizes} />
+                                    <MyScrollArea items={ProductSizes} setSize={setSize} name="size" />
                                 </ScrollArea>
                             </AccordionContent>
                         </AccordionItem>
@@ -50,12 +79,12 @@ function Products({ }) {
                             <AccordionTrigger className="h-[40px]">Catagory</AccordionTrigger>
                             <AccordionContent>
                                 <ScrollArea className="h-[100px]">
-                                    <MyScrollArea items={Catagories} />
+                                    <MyScrollArea items={Catagories} setCategory={setCategory} name="cat"/>
                                 </ScrollArea>
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
-                    <Accordion type="single" collapsible className="mr-2">
+                    {/* <Accordion type="single" collapsible className="mr-2">
                         <AccordionItem value="item-1">
                             <AccordionTrigger className="h-[40px]">Fit</AccordionTrigger>
                             <AccordionContent>
@@ -64,13 +93,13 @@ function Products({ }) {
                                 </ScrollArea>
                             </AccordionContent>
                         </AccordionItem>
-                    </Accordion>
+                    </Accordion> */}
                     <Accordion type="single" collapsible className="mr-2">
                         <AccordionItem value="item-1">
                             <AccordionTrigger className="h-[40px]">Color</AccordionTrigger>
                             <AccordionContent>
                                 <ScrollArea className="h-[100px]">
-                                    <MyScrollArea items={colors} />
+                                    <MyScrollArea items={colors} setColor={setColor} name="color"/>
                                 </ScrollArea>
                             </AccordionContent>
                         </AccordionItem>
@@ -80,7 +109,7 @@ function Products({ }) {
                             <AccordionTrigger className="h-[40px]">Price</AccordionTrigger>
                             <AccordionContent>
                                 <ScrollArea className="h-[100px]" >
-                                    <MyScrollArea items={prices} />
+                                    <MyScrollArea items={prices} setPrice={setPrice} name="price"/>
                                 </ScrollArea>
                             </AccordionContent>
                         </AccordionItem>
