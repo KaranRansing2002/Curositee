@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProdImage = ({ images }) => {
+const ProdImage = ({ images,Index}) => {
   const [image, setImage] = useState();
   const [lightboxImage, setLightboxImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,7 +12,7 @@ const ProdImage = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    setImage(images[0]);
+    setImage(Index);
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
@@ -75,11 +75,11 @@ const ProdImage = ({ images }) => {
       <div className="overflow-y-scroll element-class hidden sm:grid gap-2">
         {images.map((img, index) => (
           <div
-            className="h-36 cursor-pointer hover:scale-[0.95] transition-all ease-linear"
+            className="h-[215px] cursor-pointer hover:scale-[0.95] transition-all ease-linear"
             onClick={() => setImage(img)}
             key={index}
           >
-            <img src={img} className="h-full" alt={`Thumbnail ${index + 1}`} />
+            <img src={`http://localhost:8000/image/${images[index]}`} className="h-full" alt={`Thumbnail ${index + 1}`} />
           </div>
         ))}
       </div>
@@ -99,7 +99,7 @@ const ProdImage = ({ images }) => {
                 <img
                   key={index}
                   className="flex-shrink-0 h-full w-full object-cover"
-                  src={img}
+                  src={`http://localhost:8000/image/${image}`}
                   alt={`Product ${index + 1}`}
                   onClick={() => openLightbox(index)}
                 />
@@ -118,7 +118,7 @@ const ProdImage = ({ images }) => {
           </>
         ) : (
           <>
-            <img className="flex h-full object-cover" src={image} alt="Main Product" />
+            <img className="flex h-full object-cover" src={`http://localhost:8000/image/${image}`} alt="Main Product" />
             <div
               className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-zoom-in"
               onClick={() => openLightbox(images.indexOf(image))}
@@ -134,7 +134,7 @@ const ProdImage = ({ images }) => {
         >
           <div className="relative max-w-full max-h-full flex items-center justify-center">
             <img
-              src={lightboxImage}
+              src={`http://localhost:8000/image/${image}`}
               alt="Lightbox"
               className={`max-w-[450px] max-h-[50%] object-contain cursor-pointer transition-transform duration-300 ${isZoomed ? "scale-150 cursor-zoom-out" : "cursor-zoom-in"
                 }`}
@@ -192,7 +192,7 @@ export const SimilarProd = ({ prods, cName, scrollable }) => {
           {prods.map((prod, ind) => (
             <div key={ind} className="flex-shrink-0 mr-2">
               <img
-                src={prod.images[0]}
+                src={`http://localhost:8000/image/${image}`}
                 className={cName ? cName : "w-[90px] h-[120px] cursor-pointer"}
                 alt={prod.title}
                 onClick={() => handleImageClick(ind)}
@@ -209,7 +209,7 @@ export const SimilarProd = ({ prods, cName, scrollable }) => {
       {prods.map((prod, index) => (
         <div key={index}>
           <img
-            src={prod.images[0]}
+            src={`http://localhost:8000/image/${image}`}
             className={cName ? cName : "h-[75px] w-[60px] flex rounded border border-black cursor-pointer"}
             alt={prod.title}
             onClick={() => handleImageClick(index)}
@@ -221,27 +221,27 @@ export const SimilarProd = ({ prods, cName, scrollable }) => {
 };
 
 
-export const YouMayLike = ({ prods }) => {
-  const navigate = useNavigate();
+// export const YouMayLike = ({ prods }) => {
+//   const navigate = useNavigate();
 
-  const handleImageClick = (index) => {
-    navigate(`/product?index=${index}`);
-  };
+//   const handleImageClick = (index) => {
+//     navigate(`/product?index=${index}`);
+//   };
 
-  return (
-    <div className="w-[300px] h-[150px]">
-      <div className="overflow-x-scroll element-class flex">
-        {prods.map((prod, index) => (
-          <div key={index} className="flex-shrink-0 mr-2">
-            <img
-              src={prod.images[0]}
-              className="w-[90px] h-[120px] cursor-pointer"
-              alt={prod.title}
-              onClick={() => handleImageClick(index)}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="w-[300px] h-[150px]">
+//       <div className="overflow-x-scroll element-class flex">
+//         {prods.map((prod, index) => (
+//           <div key={index} className="flex-shrink-0 mr-2">
+//             <img
+//              src={`http://localhost:8000/image/${image}`}
+//               className="w-[90px] h-[120px] cursor-pointer"
+//               alt={prod.title}
+//               onClick={() => handleImageClick(index)}
+//             />
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
