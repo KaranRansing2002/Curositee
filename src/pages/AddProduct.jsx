@@ -5,10 +5,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { addproduct } from '@/services/product'
 import axios from 'axios'
+import { Loader } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const obj={image:null,stock:1,color:'green'}
-const AddProduct = () => {
+const AddProduct = ({setPage}) => {
 
     const [prod,setProd] = useState(()=>({
         productName : '',
@@ -18,7 +21,8 @@ const AddProduct = () => {
     }))
 
     const {loggedUser} = useContext(UserContext);
-    
+
+    const [loading,setLoading] = useState(false);    
 
     const [prodVars,setProdVars] = useState([obj,{image:null,stock:1,color:'yellow'},obj,obj]);
     const [prodV,setProdV] = useState(prodVars[0])
@@ -43,6 +47,7 @@ const AddProduct = () => {
     }
 
     const handleSubmit=async()=>{
+        setLoading(true);
         let pvs=[];
         for(let i=0;i<prodVars.length;i++){
             if(prodVars[i].image==null) continue;
@@ -64,7 +69,10 @@ const AddProduct = () => {
         console.log(product);
         
         const resp = await addproduct(product);
-        console.log(resp);  
+        console.log(resp);
+        setLoading(false); 
+        setPage(2);
+        toast("hello");
     }
 
   return (
@@ -90,7 +98,7 @@ const AddProduct = () => {
             ))}
         </div>
         <ProductVariant prodV={prodV} setProdV={setProdV} pind={pind}/>
-        <Button onClick={handleSubmit}>Add product</Button>
+        <Button onClick={handleSubmit} disabled={loading}>{loading ? <Loader className='animate-spin'/> : "Add product"}</Button>
       </div>
     </div>
   )
