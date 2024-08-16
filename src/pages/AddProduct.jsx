@@ -72,7 +72,7 @@ const AddProduct = ({setPage}) => {
         console.log(resp);
         setLoading(false); 
         setPage(2);
-        toast("hello");
+        toast("product Added successfully!");
     }
 
   return (

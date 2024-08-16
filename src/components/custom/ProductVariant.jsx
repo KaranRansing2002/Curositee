@@ -7,7 +7,7 @@ const ProductVariant = ({prodV,setProdV}) => {
     <div>
         <div className='grid gap-2'>
             <FileUploader prodV={prodV} setProdV={setProdV} />   
-            <Input placeholder="color" value={prodV.color} onChange={(e)=>setProdV(p=>({...p,color:e.target.value}))}/>
+            <Input placeholder="color" value={prodV.color} onChange={(e)=>setProdV(p=>({...p,color:e.target.value.toUpperCase()}))}/>
             <Input placeholder="stock" type="number" value={prodV.stock} onChange={(e)=>setProdV(p=>({...p,stock:e.target.value}))} />
         </div>
     </div>
