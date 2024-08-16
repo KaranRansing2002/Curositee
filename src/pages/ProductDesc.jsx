@@ -1,3 +1,4 @@
+import Bag from "@/components/custom/Bag";
 import ProdImage from "@/components/custom/ProdImage";
 import { offers } from "@/data/proddData";
 import axios from "axios";
@@ -9,11 +10,14 @@ const ProductDesc = () => {
 	const [size, setSize] = useState();
 	const [showResult, setShowResult] = useState(false);
 
+	const [bagImage,setBagImage] = useState(null);
+
 	useEffect(() => {
 		const fetchProductDetails = async () => {
 			try {
 				const response = await axios.get(`http://localhost:8080/productDetails?imgid=${index}`);
 				setProductData(response.data);
+				setBagImage(response.data.imgIds[0])
 			} catch (error) {
 				console.error("Error fetching product details:", error);
 			}
@@ -36,9 +40,10 @@ const ProductDesc = () => {
 		<div className="grid grid-cols-1 md:grid-cols-2 p-2">
 			<div className="p-2">
 				<ProdImage
-					images={data.imgIds}
-					Index={index}
-				/>
+				  images={data.imgIds}
+				  Index={index}
+				  setBagImage={setBagImage}
+				 />
 			</div>
 			<div className="p-4 flex flex-col gap-6"
 				style={{
@@ -161,7 +166,7 @@ const ProductDesc = () => {
 					</div>
 				</dialog>
 
-				{/* <Bag size={size} /> */}
+				<Bag size={"M"} data={data} bagImage={bagImage} />
 
 				<button className="btn bg-white text-black border border-black" onClick={() => document.getElementById('my_modal_3').showModal()}>
 					<img className="h-4" src="https://cdn.icon-icons.com/icons2/2761/PNG/512/love_heart_icon_176421.png" alt="wishlist-icon" />

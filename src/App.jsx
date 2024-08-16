@@ -16,29 +16,35 @@ import Vendor from "./pages/Vendor";
 
 export const UserContext = createContext(null);
 
+export const CartContext = createContext([]);
+
 function App() {
   const [loggedUser, setLoggedUser] = useState(() =>
     sessionStorage["user"] ? JSON.parse(sessionStorage["user"]) : null
   );
 
+  const [cart,setCart] = useState([]);
+
   return (
     <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
-      <div className="w-full">
-        <div>
-          <Navbar />
+      <CartContext.Provider value={{cart,setCart}}>
+        <div className="w-full">
+          <div>
+            <Navbar />
+          </div>
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/account" exact element={<UserD />} />
+            <Route path="/register" exact element={<Register />} />
+            <Route path="/product" exact element={<Products />} />
+            <Route path="/register" exact element={<Register />} />
+            <Route path="/product/:index" exact element={<ProductDesc />} />
+            <Route path="/vendor" exact element={<Vendor />} />
+          </Routes>
+          <ToastContainer />
         </div>
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/account" exact element={<UserD />} />
-          <Route path="/register" exact element={<Register />} />
-          <Route path="/product" exact element={<Products />} />
-          <Route path="/register" exact element={<Register />} />
-          <Route path="/product/:index" exact element={<ProductDesc />} />
-          <Route path="/vendor" exact element={<Vendor />} />
-        </Routes>
-        <ToastContainer />
-      </div>
+      </CartContext.Provider>
     </UserContext.Provider>
   );
 }

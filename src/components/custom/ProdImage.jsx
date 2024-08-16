@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProdImage = ({ images,Index}) => {
+const ProdImage = ({ images,Index,setBagImage}) => {
   const [image, setImage] = useState();
   const [lightboxImage, setLightboxImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,11 +72,11 @@ const ProdImage = ({ images,Index}) => {
 
   return (
     <div className="p-2 flex gap-2 h-[904px] ">
-      <div className="overflow-y-scroll element-class hidden sm:grid gap-2">
+      <div className="overflow-y-scroll element-class hidden sm:grid gap-2 ">
         {images.map((img, index) => (
           <div
             className="h-[215px] cursor-pointer hover:scale-[0.95] transition-all ease-linear"
-            onClick={() => setImage(img)}
+            onClick={() => {setImage(img);setBagImage(img)}}
             key={index}
           >
             <img src={`http://localhost:8000/image/${images[index]}`} className="h-full" alt={`Thumbnail ${index + 1}`} />
