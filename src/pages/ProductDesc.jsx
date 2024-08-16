@@ -36,9 +36,9 @@ const ProductDesc = () => {
 		<div className="grid grid-cols-1 md:grid-cols-2 p-2">
 			<div className="p-2">
 				<ProdImage
-				  images={data.imgIds}
-				  Index={index}
-				 />
+					images={data.imgIds}
+					Index={index}
+				/>
 			</div>
 			<div className="p-4 flex flex-col gap-6"
 				style={{

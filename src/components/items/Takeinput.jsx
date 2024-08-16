@@ -9,7 +9,7 @@ export function InputWithLabel({property}) {
       <Label htmlFor="email">{property['lable']}</Label>
       <Input 
       type={property['type']} 
-      id={property['id']} 
+      id={property['name']} 
       placeholder={property['placeholder']} 
       value = {intpVal}
       onChange = {(e) => setInpVal(e.target.value)}

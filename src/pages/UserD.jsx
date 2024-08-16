@@ -14,7 +14,7 @@ export default function UserD() {
     const CurrentComponent = () => {
         switch(eve){
             case 0:
-                return <UserDetails/>
+                return <UserDetails title="Hello Folks!"/>
             case 1:
                 return <UserAddress/>
             case 2:

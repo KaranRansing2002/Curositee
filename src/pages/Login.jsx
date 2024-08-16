@@ -48,6 +48,9 @@ function Login() {
     if (resp.data.status == "success") {
         toast.success(resp.data.message);
         sessionStorage.setItem('user',JSON.stringify(resp.data.data));
+        const token = (resp);
+        console.log(resp)
+        sessionStorage.setItem('token',token);
         setLoggedUser(resp.data.data);
         navigate("/");
         return;
