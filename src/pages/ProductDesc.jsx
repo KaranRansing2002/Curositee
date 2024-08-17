@@ -4,13 +4,13 @@ import { offers } from "@/data/proddData";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-const ProductDesc = () => {
+const ProductDesc = ({ handleAddToWishlist }) => {
 	const { index } = useParams();
 	const [data, setProductData] = useState(null);
 	const [size, setSize] = useState();
 	const [showResult, setShowResult] = useState(false);
 
-	const [bagImage,setBagImage] = useState(null);
+	const [bagImage, setBagImage] = useState(null);
 
 	useEffect(() => {
 		const fetchProductDetails = async () => {
@@ -36,14 +36,18 @@ const ProductDesc = () => {
 		return <p>Loading...</p>;
 	}
 
+	const product = {
+		imgid: index,
+	};
+
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 p-2">
 			<div className="p-2">
 				<ProdImage
-				  images={data.imgIds}
-				  Index={index}
-				  setBagImage={setBagImage}
-				 />
+					images={data.imgIds}
+					Index={index}
+					setBagImage={setBagImage}
+				/>
 			</div>
 			<div className="p-4 flex flex-col gap-6"
 				style={{
@@ -82,7 +86,8 @@ const ProductDesc = () => {
 							<div className="items-center">
 								<p className="Twentieth-Century">
 									Get this for <span className="font-bold">INR {Math.floor(offer.ratio * data.prod.price)}</span>
-								</p>								<p className="Twentieth-Century">{offer.desc}</p>
+								</p>
+								<p className="Twentieth-Century">{offer.desc}</p>
 								<p className="Twentieth-Century">{offer.code}</p>
 							</div>
 						</div>
@@ -168,20 +173,13 @@ const ProductDesc = () => {
 
 				<Bag size={"M"} data={data} bagImage={bagImage} />
 
-				<button className="btn bg-white text-black border border-black" onClick={() => document.getElementById('my_modal_3').showModal()}>
+				<button
+					className="btn bg-white text-black border border-black"
+					onClick={() => handleAddToWishlist(product)}
+				>
 					<img className="h-4" src="https://cdn.icon-icons.com/icons2/2761/PNG/512/love_heart_icon_176421.png" alt="wishlist-icon" />
-					Add To Wishlist</button>
-				<dialog id="my_modal_3" className="modal p-4 h-[1000px]">
-					<div className="modal-box flex flex-col items-center justify-center sm:w-full sm:h-1/2 border border-black">
-						<form method="dialog">
-							<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-						</form>
-						<img className="h-10 sm:h-10" src="https://cdn0.iconfinder.com/data/icons/apple-apps/100/Apple_Mail-512.png" alt="email-icon" />
-						<h1 className="text-black sm:p-4 font-semibold text-lg text-center">What's Your Email?</h1>
-						<input type="email" placeholder="Email Address" className="border h-[40px] w-full sm:w-[350px] sm:h-[50px] md:h-[45px] md:w-[400px] md:text-lg" />
-						<button className="btn bg-black text-white mt-6">Add To Wishlist</button>
-					</div>
-				</dialog>
+					Add To Wishlist
+				</button>
 
 				<div>
 					<div className="join join-vertical w-full">
