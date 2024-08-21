@@ -42,8 +42,13 @@ const Bag = ({ size,data,bagImage }) => {
 
     const handleCheckout=async()=>{
         setLoading(true)
-        console.log(cart);
-        const resp = await axios.get(`${config.url}/address?uid=${loggedUser.uid}`);
+        //console.log(cart);
+        const token = sessionStorage.getItem('token');
+        const resp = await axios.get(`${config.url}/address?uid=${loggedUser.uid}`,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         if(resp.data.length==0){
             toast("please add ur address!");
             return;

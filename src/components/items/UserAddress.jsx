@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 
 
 export default function UserAddress() {
+    const token = sessionStorage.getItem('token');
     const [addresses, setaddresses] = useState([]);
     const { loggedUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
@@ -31,8 +32,12 @@ export default function UserAddress() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        axios.post(`${config.url}/addAddress`, formData)
+        
+        axios.post(`${config.url}/addAddress`, formData,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log('Data sent successfully:', response.data);
             })
@@ -44,7 +49,11 @@ export default function UserAddress() {
 
     useEffect(() => {
         const url = `http://localhost:8080/address?uid=${loggedUser.uid}`;
-        axios.get(url)
+        axios.get(url,{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 console.log(response.data);
                 setaddresses(response.data);

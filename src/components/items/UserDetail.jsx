@@ -19,6 +19,7 @@ import config from "@/config";
 export default function UserDetails({visibleButton = false,title='',showEdit=true,handleFn=()=>{}, loggedIn = true}) {
      const {loggedUser} = useContext(UserContext);
      const [user,setUser] = useState({...loggedUser})
+     const token = sessionStorage.getItem('token')
      const navigate = useNavigate();
      const handleInput=(e)=>{
           const name = e.target.name;
@@ -29,6 +30,12 @@ export default function UserDetails({visibleButton = false,title='',showEdit=tru
           }))
      }
 
+    const [role, setRole] = useState(user.role || ''); // Add state for role
+
+    const handleRoleChange = (event) => {
+        setRole(event.target.value);
+        handleInput(event); // Ensure this updates the user state as well
+    };
      const [isButtonVisible,setVisibility] = useState(visibleButton);
      const DateArr = [];
      
@@ -67,10 +74,16 @@ export default function UserDetails({visibleButton = false,title='',showEdit=tru
           e.preventDefault();
           user['uid'] = loggedUser.uid;
           user['role'] = loggedUser.role;
-          console.log(user);
-          axios.post(`${config.url}/update`,user)
+          axios.post(`${config.url}/update`,user,{
+               headers: {
+                    'Authorization': `Bearer ${token}`
+               }
+          })
             .then(response => {
+                UserContext.loggedUser = response.data;
+                setUser(response.data);
                 console.log('Data sent Updated Successfully!', response.data);
+                
             })
             .catch(error => {
                 console.error('There was an error sending the data:', error);
@@ -104,6 +117,20 @@ export default function UserDetails({visibleButton = false,title='',showEdit=tru
                     <div className="flex gap-2">
                         {( !loggedIn && <Input placeholder="password" className='p-4' name="password" type="password" onChange={handleInput}/>)} 
                          <Input placeholder="date" type="date" className='p-4' name="dob" onChange={handleInput} value={user.dob}/>
+                    </div>
+
+                    <div className="mt-4">
+                        <select 
+                            name="role" 
+                            className='' 
+                            value={role} 
+                            onChange={handleRoleChange}
+                            hidden={showEdit} // Hide select if not in edit mode
+                        >
+                            <option value="">Select Role</option>
+                            <option value="VENDOR">Vendor</option>
+                            <option value="CUSTOMRER">Customer</option>
+                        </select>
                     </div>
                     
                     <div className="mt-4">
