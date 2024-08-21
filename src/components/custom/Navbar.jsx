@@ -55,11 +55,6 @@ const Navbar = () => {
                             <Link to='/' className='font-mono border-b'>WISHLIST</Link>
                             <Link to='/' className='font-mono border-b'>Logout</Link>
                         </div>
-                        {/* <SheetFooter>
-                            <SheetClose asChild>
-                                <Button type="submit">Save changes</Button>
-                            </SheetClose>
-                        </SheetFooter> */}
                     </SheetContent>
                     <Link to='/' className='flex-1 sm:pl-28 flex justify-center'>
                         <img src={logo} className='h-12' />
@@ -68,9 +63,8 @@ const Navbar = () => {
                         {loggedUser && loggedUser.role=='VENDOR' && <Link to='/vendor' className='flex gap-2 items-end '><Store className='cursor-pointer' /><p>dashboard</p></Link>}
                         {loggedUser && <Link to='/account'><User className='cursor-pointer' /></Link>}
                         <Search className='cursor-pointer' />
-                        <Heart className='cursor-pointer' />
+                        <Link to='/Wishlist'><Heart className='cursor-pointer' /></Link>
                         <div>
-
                             <div className="drawer-content"  >
                                 <label htmlFor="my-drawer" className="cursor-pointer">
                                     <CartIcon />
