@@ -1,20 +1,21 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-function ProductList({Products}) {
-    return (
-        <div className="grid grid-cols-4 md:p-2 text-xs">
-            {Products.map((product,index) => (
-                <div key={index} className='p-3'>
-                    <Link to={`${product.imgid}`}><img src={`http://localhost:8000/image/${product.imgid}`} alt={product['name']} /></Link>
-                    <div className='p-1 text-base'>
-                        <p>{product['product'].productName}</p>
-                        <p>INR : {product['product'].price}</p>
-                        {/* <p>{product['sizes'].join(', ')}</p> */}
-                    </div>
-                </div>
-            ))}
+import ImageCard from '../custom/ImageCard';
 
-        </div>
-    )
+function ProductList({ Products }) {
+    console.log(Products);
+
+    const normalizedProducts = Products.map(product => ({
+        imgid: product.imgid,
+        title: product.product.productName,
+        category: product.product.categoryName,
+        price: product.product.price,
+        rating: product.rating
+    }));
+
+    if (!normalizedProducts || normalizedProducts.length === 0) {
+        return <p>No products available</p>;
+    }
+
+    return <ImageCard Products={normalizedProducts} />;
 }
+
 export default ProductList;
