@@ -10,10 +10,15 @@ import ProdCard from '../custom/ProdCard'
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const { loggedUser } = useContext(UserContext);
+  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     const url = `${config.url}/orders?Id=${loggedUser.uid}`;
-    axios.get(url)
+    axios.get(url,{
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    })
       .then(response => {
         console.log(response.data);
         setOrders(response.data);

@@ -10,16 +10,16 @@ const ProductDesc = ({ handleAddToWishlist }) => {
 	const [size, setSize] = useState();
 	const [showResult, setShowResult] = useState(false);
 
-	const [bagImage,setBagImage] = useState(null);
-    
+	const [bagImage, setBagImage] = useState(null);
+
 	useEffect(() => {
 		if (index) {
 			const fetchData = async () => {
 				if(index){
 					const response = await productDiscription(index);
-					console.log(response);
 					setProductData(response);
 					setBagImage(response.imgIds[0])
+					console.log(data);
 				}
 			}
 			fetchData();
