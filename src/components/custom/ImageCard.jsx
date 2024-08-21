@@ -1,13 +1,15 @@
+import { UserContext } from '@/App';
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ImageCard = ({ Products, isWishlist, setWishlist }) => {
   const [productList, setProductList] = useState(Products);
   const gridCols = productList.length < 4 ? 'grid-cols-8' : 'grid-cols-4';
 
+  const { loggedUser } = useContext(UserContext);
   const handleRemove = (imgid) => {
-    axios.delete(`http://localhost:8080/delete/{imgid}?imgid=${imgid}&uid=4`)
+    axios.delete(`http://localhost:8080/delete/{imgid}?imgid=${imgid}&uid=${loggedUser.uid}`)
       .then(response => {
         console.log('Item removed from wishlist:', response.data);
         // Update local state

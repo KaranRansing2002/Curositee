@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -26,11 +26,23 @@ function App() {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/getWishList?uid=4')
-      .then(response => setWishlist(response.data))
-      .catch(error => console.error('Error fetching wishlist:', error));
-  }, []);
+  const navigate = useNavigate();
+
+    useEffect(() => {
+        // If there is no logged user, navigate to the home page and stop further execution
+        if (!loggedUser || !loggedUser.uid) {
+            navigate('/');
+            toast.error('Please log in!', {
+                position: "top-right"
+            });
+            return; // Return early to prevent the API call
+        }
+
+        // If a logged user is present, fetch the wishlist
+        axios.get(`http://localhost:8080/getWishList?uid=${loggedUser.uid}`)
+            .then(response => setWishlist(response.data))
+            .catch(error => console.error('Error fetching wishlist:', error));
+    }, []);
 
   const handleAddToWishlist = async (product) => {
     const isAlreadyInWishlist = wishlist.some(item => item.imgid === product.imgid);
