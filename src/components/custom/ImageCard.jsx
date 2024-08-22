@@ -9,13 +9,15 @@ const ImageCard = ({ Products, isWishlist, setWishlist }) => {
 
   const { loggedUser } = useContext(UserContext);
   const handleRemove = (imgid) => {
-    axios.delete(`http://localhost:8080/delete/{imgid}?imgid=${imgid}&uid=${loggedUser.uid}`)
+    axios.delete(`http://localhost:8080/delete/${imgid}?imgid=${imgid}&uid=${loggedUser.uid}`, {
+      headers: {
+        Authorization: `Bearer ${loggedUser.token}` // Replace with actual token
+      }
+    })
       .then(response => {
         console.log('Item removed from wishlist:', response.data);
-        // Update local state
         const updatedList = productList.filter(product => product.imgid !== imgid);
         setProductList(updatedList);
-        // Update global state
         setWishlist(prevList => prevList.filter(product => product.imgid !== imgid));
       })
       .catch(error => {

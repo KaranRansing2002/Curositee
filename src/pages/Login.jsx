@@ -1,6 +1,5 @@
+import { UserContext } from "@/App";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import {toast} from 'react-toastify'
 import {
   Card,
   CardContent,
@@ -10,17 +9,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import * as React from "react";
-import { Mail } from "lucide-react";
 import PasswordIcon from "@/icons/passwordIcon";
 import { login } from "@/services/user";
-import { UserContext } from "@/App";
+import { Mail } from "lucide-react";
+import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function Login() {
   const [user, setUser] = React.useState({});
   const navigate = useNavigate();
-  const {setLoggedUser} = React.useContext(UserContext);
+  const { setLoggedUser } = React.useContext(UserContext);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -32,7 +31,7 @@ function Login() {
   };
 
   const handleSubmit = async () => {
-    if (Object.keys(user).length !=2 ) {
+    if (Object.keys(user).length != 2) {
       toast.error("empty fields!");
       return;
     }
@@ -46,13 +45,13 @@ function Login() {
 
     const resp = await login(user);
     if (resp.data.status == "success") {
-        toast.success(resp.data.message);
-        sessionStorage.setItem('user',JSON.stringify(resp.data.data));
-        const token = resp.data.data.token;
-        sessionStorage.setItem('token',token);
-        setLoggedUser(resp.data.data);
-        navigate("/");
-        return;
+      toast.success(resp.data.message);
+      sessionStorage.setItem('user', JSON.stringify(resp.data.data));
+      const token = resp.data.data.token;
+      sessionStorage.setItem('token', token);
+      setLoggedUser(resp.data.data);
+      navigate("/");
+      return;
     } else toast.error(resp.message);
     console.log(resp);
   };
