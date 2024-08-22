@@ -31,10 +31,7 @@ import { UserContext } from '@/App'
 const Navbar = () => {
 
     const {loggedUser,setLoggedUser} = React.useContext(UserContext);
-    console.log(loggedUser);
-
     const navigate=useNavigate();
-    
     return (
         <Sheet>
             <div className='relative'>
@@ -74,7 +71,7 @@ const Navbar = () => {
                                 </label>
                             </div>
                         </div>
-                        {loggedUser ? <Button size="sm" onClick={()=>{sessionStorage.clear();setLoggedUser(null); navigate('/');}}>logout</Button> : <Link to='/login'><Button size="sm">Sign-in</Button></Link>}
+                        {loggedUser ? <Button size="sm" onClick={()=>{sessionStorage.clear();localStorage.clear();setLoggedUser(null); navigate('/');}}>logout</Button> : <Link to='/login'><Button size="sm">Sign-in</Button></Link>}
                         <div className='cursor-pointer'></div>
                     </div>
                     <div className='sm:hidden'>

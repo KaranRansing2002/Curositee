@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 
 function WishList({ wishlist, setWishlist }) {
     const [alertMessage, setAlertMessage] = useState("");
-
+    
     const { loggedUser } = useContext(UserContext);
     useEffect(() => {
         axios.get(`http://localhost:8080/getWishList?uid=${loggedUser.uid}`)

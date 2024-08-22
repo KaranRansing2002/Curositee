@@ -1,7 +1,7 @@
 import Bag from "@/components/custom/Bag";
 import ProdImage from "@/components/custom/ProdImage";
 import { offers } from "@/data/proddData";
-import axios from "axios";
+import {productDiscription } from "@/services/product";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 const ProductDesc = ({ handleAddToWishlist }) => {
@@ -13,18 +13,16 @@ const ProductDesc = ({ handleAddToWishlist }) => {
 	const [bagImage, setBagImage] = useState(null);
 
 	useEffect(() => {
-		const fetchProductDetails = async () => {
-			try {
-				const response = await axios.get(`http://localhost:8080/productDetails?imgid=${index}`);
-				setProductData(response.data);
-				setBagImage(response.data.imgIds[0])
-			} catch (error) {
-				console.error("Error fetching product details:", error);
-			}
-		};
-
 		if (index) {
-			fetchProductDetails();
+			const fetchData = async () => {
+				if(index){
+					const response = await productDiscription(index);
+					setProductData(response);
+					setBagImage(response.imgIds[0])
+					console.log(data);
+				}
+			}
+			fetchData();
 		}
 	}, [index]);
 

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { json, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -25,24 +25,27 @@ function App() {
 
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-
   const navigate = useNavigate();
+  useEffect(() => {
+    // If there is no logged user, navigate to the home page and stop further execution
+    if (!loggedUser || !loggedUser.uid) {
+      navigate('/');
+      toast.error('Please log in!', {
+        position: "top-right"
+      });
+      return; // Return early to prevent the API call
+    }
 
-    useEffect(() => {
-        // If there is no logged user, navigate to the home page and stop further execution
-        if (!loggedUser || !loggedUser.uid) {
-            navigate('/');
-            toast.error('Please log in!', {
-                position: "top-right"
-            });
-            return; // Return early to prevent the API call
-        }
-
-        // If a logged user is present, fetch the wishlist
-        axios.get(`http://localhost:8080/getWishList?uid=${loggedUser.uid}`)
-            .then(response => setWishlist(response.data))
-            .catch(error => console.error('Error fetching wishlist:', error));
-    }, []);
+    // If a logged user is present, fetch the wishlist
+    const token = sessionStorage.getItem("token");
+    axios.get(`http://localhost:8080/getWishList?uid=${loggedUser.uid}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => setWishlist(response.data))
+      .catch(error => console.error('Error fetching wishlist:', error));
+  }, []);
 
   const handleAddToWishlist = async (product) => {
     const isAlreadyInWishlist = wishlist.some(item => item.imgid === product.imgid);
@@ -52,11 +55,16 @@ function App() {
         position: "top-right"
       });
     } else {
-      const uid = 4;
-      const apiUrl = `http://localhost:8080/addToWishList?imgid=${product.imgid}&uid=${uid}`;
-
+      const user = sessionStorage.getItem('user');
+      const userOjb = JSON.parse(user);
+      const apiUrl = `http://localhost:8080/addToWishList?imgid=${product.imgid}&uid=${userOjb.uid}`;
+      const token = sessionStorage.getItem("token");
       try {
-        await axios.post(apiUrl);
+        await axios.post(apiUrl, {}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setWishlist([...wishlist, product]);
         toast.success('Product added to wishlist!', {
           position: "top-right"
