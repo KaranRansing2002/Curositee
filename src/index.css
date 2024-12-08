@@ -81,7 +81,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground ;
   }
 }
 
@@ -163,4 +163,11 @@ tr {
 .element-class::-webkit-scrollbar {
   display: none;
   /* Safari and Chrome */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }

@@ -24,14 +24,14 @@ const ImageCard = ({ Products, isWishlist, setWishlist }) => {
   };
 
   return (
-    <div className={`grid ${gridCols} md:p-2 text-xs -ml-1 h-screen overflow-auto`}>
+    <div className={`flex flex-wrap justify-evenly md:p-2 text-xs -ml-1 h-screen overflow-auto w-full`}>
       {productList.map((product, index) => (
         <div key={index} className='p-3'>
           <Link to={`${product.imgid}`}>
             <img
-              src={`http://localhost:8000/image/${product.imgid}`}
+              src={`https://image-server-ebon.vercel.app/image/${product.imgid}`}
               alt={product.title}
-              className='hover:scale-y-105 hover:scale-105 ease-in-out transform transition duration-300 rounded-sm'
+              className='hover:scale-y-105 hover:scale-105 ease-in-out transform transition duration-300 rounded-sm h-60'
             />
           </Link>
           <div className='Futura p-1 text-base items-center'>

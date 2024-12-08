@@ -119,19 +119,19 @@ export default function UserDetails({visibleButton = false,title='',showEdit=tru
                          <Input placeholder="date" type="date" className='p-4' name="dob" onChange={handleInput} value={user.dob}/>
                     </div>
 
-                    <div className="mt-4">
+                    <Button className="mt-4 p-1 rounded-xl">
                         <select 
+                            className='text-white flex w-full h-full text-center'
                             name="role" 
-                            className='' 
                             value={role} 
                             onChange={handleRoleChange}
                             hidden={showEdit} // Hide select if not in edit mode
                         >
                             <option value="">Select Role</option>
                             <option value="VENDOR">Vendor</option>
-                            <option value="CUSTOMRER">Customer</option>
+                            <option value="CUSTOMER">Customer</option>
                         </select>
-                    </div>
+                    </Button>
                     
                     <div className="mt-4">
                         {(isButtonVisible || showEdit==false) && <Button onClick={loggedIn ? handleUpdate : handleSubmit}>{showEdit==false ? "Register" : "Save"}</Button>} 

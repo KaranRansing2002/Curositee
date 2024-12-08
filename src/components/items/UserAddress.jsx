@@ -6,6 +6,7 @@ import axios from "axios";
 import { UserContext } from "@/App";
 import config from "@/config";
 import { Input } from "../ui/input";
+import { toast } from "react-toastify";
 
 
 export default function UserAddress() {
@@ -30,20 +31,27 @@ export default function UserAddress() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         
-        axios.post(`${config.url}/addAddress`, formData,{
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then(response => {
-                console.log('Data sent successfully:', response.data);
+        try {
+            const resp = await axios.post(`${config.url}/addAddress`, formData,{
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
-            .catch(error => {
-                console.error('There was an error sending the data:', error);
-            });
+            if(resp.data){
+                
+                toast.success(resp.data.message)
+            }
+        } catch (error) {
+            console.log(error)
+            if(error.code=="ERR_BAD_REQUEST"){
+                toast.error(error.response?.data?.errors[0]?.defaultMessage)
+            }
+            else toast.error("some error occured!"); 
+        }
+        
     };
 
 

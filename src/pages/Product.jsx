@@ -64,7 +64,7 @@ function Products({ }) {
         <div class="grid grid-cols-12">
             <div className="hidden sm:block md:col-span-2 m-2 pt-3 pb-3 ">
                 <div className="justify-center">
-                    <Accordion type="single" collapsible className="mr-2">
+                    <Accordion type="single" collapsible={false} defaultValue="item-1" className="mr-2">
                         <AccordionItem value="item-1">
                             <AccordionTrigger className="h-[40px]">Size</AccordionTrigger>
                             <AccordionContent>
@@ -74,8 +74,8 @@ function Products({ }) {
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
-                    <Accordion type="single" collapsible className="mr-2">
-                        <AccordionItem value="item-2">
+                    <Accordion type="single" collapsible={false} defaultValue="item-1" className="mr-2">
+                        <AccordionItem value="item-1">
                             <AccordionTrigger className="h-[40px]">Catagory</AccordionTrigger>
                             <AccordionContent>
                                 <ScrollArea className="h-[100px]">
@@ -94,7 +94,7 @@ function Products({ }) {
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion> */}
-                    <Accordion type="single" collapsible className="mr-2">
+                    <Accordion type="single" collapsible={false} defaultValue="item-1" className="mr-2">
                         <AccordionItem value="item-1">
                             <AccordionTrigger className="h-[40px]">Color</AccordionTrigger>
                             <AccordionContent>
@@ -104,7 +104,7 @@ function Products({ }) {
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
-                    <Accordion type="single" collapsible className="mr-2">
+                    <Accordion type="single" collapsible={false} defaultValue="item-1" className="mr-2">
                         <AccordionItem value="item-1">
                             <AccordionTrigger className="h-[40px]">Price</AccordionTrigger>
                             <AccordionContent>
@@ -117,7 +117,7 @@ function Products({ }) {
                 </div>
 
             </div>
-            <div className="col-span-12 md:col-span-10  bg-white">
+            <div className="col-span-12 md:col-span-10 flex flex-wrap">
                 <ProductList
                     Products={Products}
                 />

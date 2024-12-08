@@ -51,19 +51,6 @@ const Bag = ({ size, data, bagImage }) => {
             return;
         }
 
-        const aid = resp.data[0].aid;
-        cart.forEach(async (ord) => {
-            const order = {
-                quantity: ord.qty,
-                status: false,
-                addressId: aid,
-                productVarientId: ord.image,
-                userId: loggedUser.uid
-            }
-            const res = await placeOrder(order);
-            toast.success("order placed!")
-        });
-
         const stripe = await loadStripe('pk_test_51K96NiSE0mSwz2G7KtxO93AIV6pTsGr3r4Ay1HB051ljJl14Abr9dvNZ0gUIjmLAAjjeMIWusmzx8kRDPFAYKzvb00RzkYicMY');
 
         const body = {
@@ -74,7 +61,7 @@ const Bag = ({ size, data, bagImage }) => {
             "Content-Type": "application/json"
         }
 
-        const res = await axios.post("http://localhost:4000/checkout", body);
+        const res = await axios.post("https://curiousitee-payment-stripe-server.vercel.app/checkout", body,{ headers, withCredentials: true } );
 
         const session = await res.data;
 
@@ -82,10 +69,25 @@ const Bag = ({ size, data, bagImage }) => {
             sessionId: session.id
         })
 
+
         if (result.error) {
             toast.error("payement failed!")
         }
 
+        else{
+            const aid = resp.data[0].aid;
+            cart.forEach(async (ord) => {
+                const order = {
+                    quantity: ord.qty,
+                    status: false,
+                    addressId: aid,
+                    productVarientId: ord.image,
+                    userId: loggedUser.uid
+                }
+                const res = await placeOrder(order);
+                toast.success("order placed!")
+            });
+        }
 
         setLoading(false);
     }

@@ -34,7 +34,7 @@ const Home = () => {
 
             <div className='text-center text-xl font-bold underline-offset-1'>TRENDING NOW</div>
 
-            <div className='grid sm:grid-cols-5 grid-cols-2 gap-4 p-8'>
+            <div className='flex justify-evenly flex-wrap gap-4 p-8 '>
                 {
                     TrendingProducts.map((prod,index) => (
                         <ProdCard key={prod.imgid} ind={prod.imgid} data={prod} />
@@ -72,10 +72,12 @@ const Catgeories = () => {
 
 const ProdCard = ({ data, ind }) => {
     //const [image, setImage] = useState(data.images[0]);
+    if(!ind) return;
+    // console.log(console.log(`Image URL: https://image-server-ebon.vercel.app/${ind}`));
     return (
         <Link to={`/product/${ind}`}>
             <div className='flex flex-col cursor-pointer p-2 shadow-2xl rounded border border-slate-200' >
-                <img src={`http://localhost:8000/image/${ind}`} className='hover:brightness-75 rounded-xl  transition-all flex ease-linear hover:scale-[]' onMouseEnter={() => setImage(data.images.length > 1 ? data.images[1] : image)} onMouseLeave={() => setImage(data.images[0])} />
+                <img src={`https://image-server-ebon.vercel.app/image/${ind}`} className='hover:brightness-75 rounded-xl  transition-all flex ease-linear hover:scale-[] sm:h-60 ' onMouseEnter={() => setImage(data.images.length > 1 ? data.images[1] : image)} onMouseLeave={() => setImage(data.images[0])} />
                 {/* <h3 className='Futura text-nowrap overflow-hidden text-[16px] text-slate-800 text-left'>{data.title[0] + data.title.substring(1).toLowerCase()}</h3> */}
                 {/* <p className='Twentieth-Century text-left text-sm text-slate-600'>INR : {data.price}</p> */}
             </div>

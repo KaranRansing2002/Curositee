@@ -79,7 +79,7 @@ const ProdImage = ({ images,Index,setBagImage}) => {
             onClick={() => {setImage(img);setBagImage(img)}}
             key={index}
           >
-            <img src={`http://localhost:8000/image/${images[index]}`} className="h-full" alt={`Thumbnail ${index + 1}`} />
+            <img src={`https://image-server-ebon.vercel.app/image/${images[index]}`} className="h-full" alt={`Thumbnail ${index + 1}`} />
           </div>
         ))}
       </div>
@@ -99,7 +99,7 @@ const ProdImage = ({ images,Index,setBagImage}) => {
                 <img
                   key={index}
                   className="flex-shrink-0 h-full w-full object-cover"
-                  src={`http://localhost:8000/image/${image}`}
+                  src={`https://image-server-ebon.vercel.app/image/${image}`}
                   alt={`Product ${index + 1}`}
                   onClick={() => openLightbox(index)}
                 />
@@ -118,7 +118,7 @@ const ProdImage = ({ images,Index,setBagImage}) => {
           </>
         ) : (
           <>
-            <img className="flex h-full object-cover" src={`http://localhost:8000/image/${image}`} alt="Main Product" />
+            <img className="flex h-full object-cover" src={`https://image-server-ebon.vercel.app/image/${image}`} alt="Main Product" />
             <div
               className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-zoom-in"
               onClick={() => openLightbox(images.indexOf(image))}
@@ -134,7 +134,7 @@ const ProdImage = ({ images,Index,setBagImage}) => {
         >
           <div className="relative max-w-full max-h-full flex items-center justify-center">
             <img
-              src={`http://localhost:8000/image/${image}`}
+              src={`https://image-server-ebon.vercel.app/image/${image}`}
               alt="Lightbox"
               className={`max-w-[450px] max-h-[50%] object-contain cursor-pointer transition-transform duration-300 ${isZoomed ? "scale-150 cursor-zoom-out" : "cursor-zoom-in"
                 }`}
@@ -192,7 +192,7 @@ export const SimilarProd = ({ prods, cName, scrollable }) => {
           {prods.map((prod, ind) => (
             <div key={ind} className="flex-shrink-0 mr-2">
               <img
-                src={`http://localhost:8000/image/${image}`}
+                src={`https://image-server-ebon.vercel.app/image/${image}`}
                 className={cName ? cName : "w-[90px] h-[120px] cursor-pointer"}
                 alt={prod.title}
                 onClick={() => handleImageClick(ind)}
@@ -209,7 +209,7 @@ export const SimilarProd = ({ prods, cName, scrollable }) => {
       {prods.map((prod, index) => (
         <div key={index}>
           <img
-            src={`http://localhost:8000/image/${image}`}
+            src={`https://image-server-ebon.vercel.app/image/${image}`}
             className={cName ? cName : "h-[75px] w-[60px] flex rounded border border-black cursor-pointer"}
             alt={prod.title}
             onClick={() => handleImageClick(index)}

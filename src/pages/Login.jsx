@@ -31,7 +31,8 @@ function Login() {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
     if (Object.keys(user).length !=2 ) {
       toast.error("empty fields!");
       return;
@@ -58,7 +59,7 @@ function Login() {
   };
 
   return (
-    <div className="md:h-[530px] flex items-center justify-center">
+    <form className="md:h-[530px] flex items-center justify-center">
       <Card className="shadow-yellow-400 shadow-xl px-16">
         <CardHeader>
           <CardTitle>
@@ -96,10 +97,10 @@ function Login() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleSubmit}>Login</Button>
+          <Button type="submit" onClick={handleSubmit}>Login</Button>
         </CardFooter>
       </Card>
-    </div>
+    </form>
   );
 }
 export default Login;

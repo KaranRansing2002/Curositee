@@ -67,7 +67,7 @@ const ProductTable = ({ products,setPage,setDel }) => {
                             <tr key={index}>
                                 <td className="py-2 px-4 border-b ">
                                     <div className="grid place-items-center">
-                                        <img className="h-14" src={`http://localhost:8000/image/${product.imgid}`}/>
+                                        <img className="h-14" src={`https://image-server-ebon.vercel.app/${product.imgid}`}/>
                                         <Link to={`/product/${product.imgid}`} className="text-sm underline text-blue-400">{product.imgid}</Link>
                                     </div>
                                 </td>

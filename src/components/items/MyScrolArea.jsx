@@ -17,13 +17,15 @@ function MyScrollArea({ items, name, setSize, setColor, setCategory, setPrice })
         }
 
         if (name === 'price') {
+            //console.log("here",item)
             setPrice(item); 
         }
 
         if (name !== 'price') 
             { 
-            setSelectedItem((prev) => (prev === item ? null : item));
+            
         }
+        setSelectedItem((prev) => (prev === item ? null : item));
     };
 
     return (
@@ -32,7 +34,7 @@ function MyScrollArea({ items, name, setSize, setColor, setCategory, setPrice })
                 <div key={item} className='flex flex-col text-xs p-1'>
                     <div className="grid grid-cols-3 items-center">
                         <input
-                        className='cursor-pointer'
+                        className='cursor-pointer text-green-400'
                             type="checkbox"
                             checked={selectedItem === item}
                             onChange={() => handleItemChange(item)}

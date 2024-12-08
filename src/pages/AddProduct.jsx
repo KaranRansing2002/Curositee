@@ -47,11 +47,15 @@ const AddProduct = ({setPage}) => {
     }
 
     const handleSubmit=async()=>{
+        if(prod.productDesc=="" || prod.productName=="" || prod.categoryName==""){
+            toast.error("Empty fields!")
+            return;
+        }
         setLoading(true);
         let pvs=[];
         for(let i=0;i<prodVars.length;i++){
             if(prodVars[i].image==null) continue;
-            const resp = await axios.post("http://localhost:8000/upload", { image: prodVars[i].image}, {
+            const resp = await axios.post("https://image-server-ebon.vercel.app/upload", { image: prodVars[i].image}, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                 }
@@ -80,11 +84,11 @@ const AddProduct = ({setPage}) => {
       <div className='border-2 rounded sm:flex flex-col gap-2 p-4'>
         <div className='flex flex-col gap-3'>
             <Input className='' placeholder='Title here' name="productName" onChange={handleInput} />
-            <textarea className='rounded border p-2' placeholder='Product description' name="productDesc" onChange={handleInput}></textarea>
+            <textarea className='rounded border p-2 bg-background' placeholder='Product description' name="productDesc" onChange={handleInput}></textarea>
             <Input type="number" className='' placeholder='Product price' name="price" onChange={handleInput} />
             <div className="dropdown dropdown dropdown-end ">
                 <div tabIndex={0} role="button" className="btn bg-slate-800 text-white m-1 w-full">Select Category - {prod.categoryName}</div>
-                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow bg-background">
                     <li onClick={()=>{setProd(p=>({...p,categoryName : "T_SHIRT"}))}}><a>T_SHIRT</a></li>
                     <li onClick={()=>{setProd(p=>({...p,categoryName : "POLO"}))}}><a>POLO</a></li>
                     <li onClick={()=>{setProd(p=>({...p,categoryName : "SHIRT"}))}}><a>SHIRT</a></li>

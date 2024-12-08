@@ -30,9 +30,9 @@ function App() {
     // If there is no logged user, navigate to the home page and stop further execution
     if (!loggedUser || !loggedUser.uid) {
       navigate('/');
-      toast.error('Please log in!', {
-        position: "top-right"
-      });
+      // toast.error('Please log in!', {
+      //   position: "top-right"
+      // });
       return; // Return early to prevent the API call
     }
 
@@ -81,7 +81,7 @@ function App() {
   return (
     <UserContext.Provider value={{ loggedUser, setLoggedUser }}>
       <CartContext.Provider value={{ cart, setCart }}>
-        <div className="w-full">
+        <div className="w-full  ">
           <div>
             <Navbar />
           </div>

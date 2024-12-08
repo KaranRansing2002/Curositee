@@ -17,9 +17,9 @@ const Vendor = () => {
         <Button size='sm' className={page==1 ? 'text-[10px] sm:text-sm px-2' : 'text-[10px] sm:text-sm px-2 bg-yellow-400'} onClick={()=>setPage(1)}  >add-product</Button>
         <Button size='sm' className={page==2 ? 'text-[10px] sm:text-sm px-2' : 'text-[10px] sm:text-sm px-2 bg-yellow-400'} onClick={()=>setPage(2)}  >my-products</Button>
       </div>
-      {
-        page==0 ? <Dashboard/> : page==1 ? <AddProduct setPage={setPage}/> : <Myproducts user={loggedUser} setPage={setPage}/>
-      }
+        {
+          page==0 ? <Dashboard/> : page==1 ? <AddProduct setPage={setPage}/> : <Myproducts user={loggedUser} setPage={setPage}/>
+        }
     </div>
   )
 }

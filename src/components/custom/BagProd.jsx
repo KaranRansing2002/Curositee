@@ -38,8 +38,7 @@ const BagProd = ({data}) => {
 
   return (
     <div className='p-2 flex gap-2 border cursor-pointer border-black  transition-all ease-linear'>
-      {/* <img src={`http://localhost:8000/image/${data.image}`} className='h-24'/> */}
-      <div className='h-20 w-24 bg-cover rounded' style={{backgroundImage:`url(http://localhost:8000/image/${data.image})`}}></div>
+      <div className='h-20 w-24 bg-cover rounded' style={{backgroundImage:`url(https://image-server-ebon.vercel.app/image/${data.image})`}}></div>
       <div className='flex flex-col w-full'>
         <div className='flex justify-between w-full '>
             <Link to={`/product/${data.image}`} className='font-semibold text-lg underline flex-1 pt-2'>{data.productName.toUpperCase()}</Link>
