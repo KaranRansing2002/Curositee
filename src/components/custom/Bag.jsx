@@ -63,6 +63,7 @@ const Bag = ({ size, data, bagImage }) => {
 
         const res = await axios.post("https://curiousitee-payment-stripe-server.vercel.app/checkout", body,{ headers, withCredentials: true } );
 
+        console.log(res);
         const session = await res.data;
 
         const result = await stripe.redirectToCheckout({

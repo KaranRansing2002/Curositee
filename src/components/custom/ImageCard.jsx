@@ -9,7 +9,7 @@ const ImageCard = ({ Products, isWishlist, setWishlist }) => {
 
   const { loggedUser } = useContext(UserContext);
   const handleRemove = (imgid) => {
-    axios.delete(`http://localhost:8080/delete/{imgid}?imgid=${imgid}&uid=${loggedUser.uid}`)
+    axios.delete(`https://snitchserver.up.railway.app/delete/{imgid}?imgid=${imgid}&uid=${loggedUser.uid}`)
       .then(response => {
         console.log('Item removed from wishlist:', response.data);
         // Update local state

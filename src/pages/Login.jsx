@@ -45,17 +45,22 @@ function Login() {
       }
     });
 
-    const resp = await login(user);
-    if (resp.data.status == "success") {
-        toast.success(resp.data.message);
-        sessionStorage.setItem('user',JSON.stringify(resp.data.data));
-        const token = resp.data.data.token;
-        sessionStorage.setItem('token',token);
-        setLoggedUser(resp.data.data);
-        navigate("/");
-        return;
-    } else toast.error(resp.message);
-    console.log(resp);
+    try {
+      const resp = await login(user);
+      if (resp.data.status == "success") {
+          toast.success(resp.data.message);
+          sessionStorage.setItem('user',JSON.stringify(resp.data.data));
+          const token = resp.data.data.token;
+          sessionStorage.setItem('token',token);
+          setLoggedUser(resp.data.data);
+          navigate("/");
+          return;
+      } else toast.error(resp.message);
+    } catch (error) {
+      const message = error?.response?.data?.message
+      console.log(message);
+      toast.error(message ? message : "something went wrong!" );
+    }
   };
 
   return (
@@ -63,7 +68,7 @@ function Login() {
       <Card className="shadow-yellow-400 shadow-xl px-16">
         <CardHeader>
           <CardTitle>
-            <h1>Login</h1>
+            <h4>Login</h4>
           </CardTitle>
           <CardDescription>
             <section>

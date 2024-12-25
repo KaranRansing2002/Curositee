@@ -38,7 +38,7 @@ function App() {
 
     // If a logged user is present, fetch the wishlist
     const token = sessionStorage.getItem("token");
-    axios.get(`http://localhost:8080/getWishList?uid=${loggedUser.uid}`, {
+    axios.get(`https://snitchserver.up.railway.app/getWishList?uid=${loggedUser.uid}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -57,7 +57,7 @@ function App() {
     } else {
       const user = sessionStorage.getItem('user');
       const userOjb = JSON.parse(user);
-      const apiUrl = `http://localhost:8080/addToWishList?imgid=${product.imgid}&uid=${userOjb.uid}`;
+      const apiUrl = `https://snitchserver.up.railway.app/addToWishList?imgid=${product.imgid}&uid=${userOjb.uid}`;
       const token = sessionStorage.getItem("token");
       try {
         await axios.post(apiUrl, {}, {

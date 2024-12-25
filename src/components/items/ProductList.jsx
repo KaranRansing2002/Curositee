@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import ImageCard from '../custom/ImageCard';
 
 function ProductList({ Products }) {
-    console.log(Products);
 
     const normalizedProducts = Products.map(product => ({
         imgid: product.imgid,

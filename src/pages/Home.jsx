@@ -12,7 +12,7 @@ const Home = () => {
     const [TrendingProducts,setTrendingProducts] = useState([]);
     
     useEffect(() => {
-        axios.get('http://localhost:8080/orders/trending')
+        axios.get('https://snitchserver.up.railway.app/orders/trending')
             .then(response => {
                // console.log(response.data);
                 setTrendingProducts(response.data);

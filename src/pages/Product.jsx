@@ -24,7 +24,7 @@ function Products({ }) {
     const [size, setSize] = useState(null);
     const [urlQuery, setUrlQuery] = useState("");
     useEffect(() => {
-        const url = `http://localhost:8080/product/filter${urlQuery.length > 1 ? urlQuery : ""}`;
+        const url = `https://snitchserver.up.railway.app/product/filter${urlQuery.length > 1 ? urlQuery : ""}`;
         console.log(url);
         axios.get(url)
             .then(response => {

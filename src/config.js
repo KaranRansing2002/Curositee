@@ -1,5 +1,5 @@
 const config = {
-  url: 'http://localhost:8080',
+  url: 'https://snitchserver.up.railway.app',
 }
 
 export default config

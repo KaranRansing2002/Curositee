@@ -8,7 +8,7 @@ function WishList({ wishlist, setWishlist }) {
     
     const { loggedUser } = useContext(UserContext);
     useEffect(() => {
-        axios.get(`http://localhost:8080/getWishList?uid=${loggedUser.uid}`)
+        axios.get(`https://snitchserver.up.railway.app/getWishList?uid=${loggedUser.uid}`)
             .then(response => {
                 console.log(response.data);
                 setWishlist(response.data);

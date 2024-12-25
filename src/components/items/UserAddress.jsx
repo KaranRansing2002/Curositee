@@ -56,7 +56,7 @@ export default function UserAddress() {
 
 
     useEffect(() => {
-        const url = `http://localhost:8080/address?uid=${loggedUser.uid}`;
+        const url = `https://snitchserver.up.railway.app/address?uid=${loggedUser.uid}`;
         axios.get(url,{
             headers: {
                 'Authorization': `Bearer ${token}`
